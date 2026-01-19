@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameLiminals - Projects Coming Soon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+         :root {
+            --primary-color: #4a6fff;
+            --secondary-color: #ff6b6b;
+            --accent-color: #00d4aa;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #ffffff;
+            --background-gray: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow-light: 0 5px 20px rgba(38, 136, 255, 0.445);
+            --shadow-medium: 0 10px 30px rgba(255, 23, 147, 0.492);
+            --border-radius: 12px;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .preloader.loaded {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .preloader-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+        
+        .preloader-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .logo-image-container {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: logoFloat 3s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .preloader-logo-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            filter: drop-shadow(0 0 15px rgba(74, 111, 255, 0.3));
+        }
+        
+        .preloader-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: inline-flex;
+            gap: 2px;
+            letter-spacing: 2px;
+            margin: 0;
+            position: relative;
+        }
+        
+        .title-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px) rotateY(90deg);
+            animation: titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-shadow: 0 0 10px rgba(74, 111, 255, 0.5), 0 0 20px rgba(74, 111, 255, 0.3), 0 0 30px rgba(74, 111, 255, 0.2);
+            color: #ffffff;
+        }
+        
+        .title-char:nth-child(odd) {
+            color: var(--primary-color);
+        }
+        
+        .title-char:nth-child(even) {
+            color: var(--accent-color);
+        }
+        
+        .preloader-tagline {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            margin-top: 1rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .tagline-char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            color: #cbd5e1;
+        }
+        
+        .tagline-char:nth-child(odd) {
+            color: var(--secondary-color);
+        }
+        
+        .tagline-char:nth-child(even) {
+            color: #ffffff;
+        }
+        
+        .tagline-space {
+            width: 10px;
+        }
+        
+        .preloader-progress {
+            width: 100%;
+            max-width: 400px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 4px;
+            transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes logoFloat {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.05);
+            }
+        }
+        
+        @keyframes titleReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateY(0);
+            }
+        }
+        
+        @keyframes taglineReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes progressShine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .blue-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #00aaff;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            z-index: 9999;
+            transition: transform 0.1s;
+            box-shadow: 0 0 10px #00aaff, 0 0 20px #00aaff;
+        }
+        
+        .cursor-follower {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 170, 255, 0.3);
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease-out;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Header with logos */
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .logos {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .logo {
+            height: 80px;
+            filter: drop-shadow(0 0 5px rgba(0, 170, 255, 0.5));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo-gameliminals {
+            height: 90px;
+        }
+        /* Back to home button */
+        
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 170, 255, 0.2);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border: 2px solid #00aaff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-btn:hover {
+            background: rgba(0, 170, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.3);
+        }
+        /* Main content */
+        
+        .main-content {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+        
+        .title {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #00aaff, #00ffcc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: #aaddff;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        /* Projects reveal section */
+        
+        .projects-container {
+            position: relative;
+            margin: 60px auto;
+            width: 90%;
+            max-width: 900px;
+            perspective: 1000px;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: rgba(0, 170, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            border: 2px solid rgba(0, 170, 255, 0.3);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #00aaff, #00ffcc);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #00aaff;
+            box-shadow: 0 15px 40px rgba(0, 170, 255, 0.4);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #00aaff;
+        }
+        
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .project-status {
+            font-size: 1.1rem;
+            color: #00ffcc;
+            padding: 8px 20px;
+            background: rgba(0, 170, 255, 0.2);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 170, 255, 0.5);
+        }
+        /* Coming soon message */
+        
+        .coming-soon-container {
+            position: relative;
+            margin: 60px auto;
+            width: 90%;
+            max-width: 800px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, rgba(10, 10, 42, 0.7), rgba(26, 26, 74, 0.7));
+            border: 3px solid #00aaff;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 170, 255, 0.3);
+            overflow: hidden;
+        }
+        
+        .coming-soon-container::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(transparent, #00aaff, transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+        
+        .coming-soon-container::after {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: linear-gradient(45deg, #0a0a2a, #1a1a4a);
+            border-radius: 16px;
+        }
+        
+        .coming-soon-message {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #00ffcc;
+            text-align: center;
+            padding: 20px;
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.7);
+            position: relative;
+            z-index: 2;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* Features section */
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 80px;
+        }
+        
+        .feature-card {
+            background: rgba(0, 170, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(0, 170, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #00aaff;
+            background: rgba(0, 170, 255, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #00aaff;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .feature-description {
+            color: #aaddff;
+            line-height: 1.6;
+        }
+        /* Footer */
+        
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 20px;
+            color: #88aadd;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0, 170, 255, 0.2);
+        }
+        /* Floating particles */
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background-color: rgba(0, 170, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Responsive design */
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3rem;
+            }
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            .logos {
+                justify-content: center;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .header {
+                flex-direction: column;
+            }
+            .coming-soon-message {
+                font-size: 2.5rem;
+            }
+            .project-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            .coming-soon-message {
+                font-size: 2rem;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <div class="logo-image-container">
+                    <img src="assests/logo2.png" alt="GameLiminals Logo" class="preloader-logo-img">
+                </div>
+                <h1 class="preloader-title">
+                    <span class="title-char">G</span>
+                    <span class="title-char">a</span>
+                    <span class="title-char">m</span>
+                    <span class="title-char">e</span>
+                    <span class="title-char">L</span>
+                    <span class="title-char">i</span>
+                    <span class="title-char">m</span>
+                    <span class="title-char">i</span>
+                    <span class="title-char">n</span>
+                    <span class="title-char">a</span>
+                    <span class="title-char">l</span>
+                    <span class="title-char">s</span>
+                </h1>
+                <p class="preloader-tagline">
+                    <span class="tagline-char">P</span>
+                    <span class="tagline-char">R</span>
+                    <span class="tagline-char">O</span>
+                    <span class="tagline-char">J</span>
+                    <span class="tagline-char">E</span>
+                    <span class="tagline-char">C</span>
+                    <span class="tagline-char">T</span>
+                    <span class="tagline-char">S</span>
+                    <span class="tagline-space">&nbsp;</span>
+                    <span class="tagline-char">P</span>
+                    <span class="tagline-char">O</span>
+                    <span class="tagline-char">R</span>
+                    <span class="tagline-char">T</span>
+                    <span class="tagline-char">F</span>
+                    <span class="tagline-char">O</span>
+                    <span class="tagline-char">L</span>
+                    <span class="tagline-char">I</span>
+                    <span class="tagline-char">O</span>
+                </p>
+            </div>
+            <div class="preloader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Blue cursor effect -->
+    <div class="blue-cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <!-- Header with logos -->
+        <header class="header">
+            <div class="logos">
+                <!-- Adamas University Logo -->
+                <img src="assests/logo.png" alt="Adamas University Logo" class="logo logo-adamas">
+                <!-- GameLiminals Logo -->
+                <img src="assests/au_logo.jpg" alt="GameLiminals Logo" class="logo logo-gameliminals">
+            </div>
+
+            <!-- Back to Home button -->
+            <a href="index.html" class="home-btn">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </header>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <h1 class="title">OUR PROJECTS</h1>
+            <p class="subtitle">Adamas University Game Development Club<br>Where innovative ideas transform into immersive gaming experiences</p>
+
+            <!-- Coming Soon Section -->
+            <div class="coming-soon-container">
+                <div class="coming-soon-message">
+                    COMING<br>SOON
+                </div>
+            </div>
+
+            <!-- Project Grid (Placeholder) -->
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="project-title">Adventure Quest</div>
+                    <div class="project-status">In Development</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-dragon"></i>
+                    </div>
+                    <div class="project-title">Mythic Realms</div>
+                    <div class="project-status">Coming Soon</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-title">Cyber Nexus</div>
+                    <div class="project-status">Planning Phase</div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <div class="project-title">Mind Bender</div>
+                    <div class="project-status">Coming Soon</div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="feature-title">Innovative Concepts</div>
+                    <div class="feature-description">
+                        We're working on cutting-edge game concepts that push the boundaries of creativity and technology.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="feature-title">Advanced Development</div>
+                    <div class="feature-description">
+                        Our projects utilize modern game engines and development tools to create immersive experiences.
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="feature-title">Team Collaboration</div>
+                    <div class="feature-description">
+                        Every project is a result of collaborative efforts between programmers, designers, and artists.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>© 2026 GameLiminals - Adamas University Game Development Club. All rights reserved.</p>
+            <p>Exciting projects are in development. Stay tuned for groundbreaking releases!</p>
+        </footer>
+    </div>
+
+    <script>
+        // Preloader Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.querySelector('.preloader');
+            const progressBar = document.querySelector('.progress-bar');
+            const titleChars = document.querySelectorAll('.title-char');
+            const taglineChars = document.querySelectorAll('.tagline-char');
+
+            // Initialize preloader
+            if (preloader) {
+                // Animate logo floating
+                const logo = document.querySelector('.preloader-logo-img');
+                if (logo) {
+                    logo.style.animation = 'logoFloat 3s ease-in-out infinite';
+                }
+
+                // Animate title characters with delay
+                titleChars.forEach((char, index) => {
+                    setTimeout(() => {
+                        char.style.animationDelay = `${index * 0.1}s`;
+                        char.style.animation = 'titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    }, 100);
+                });
+
+                // Animate tagline characters with delay
+                taglineChars.forEach((char, index) => {
+                    setTimeout(() => {
+                        char.style.animationDelay = `${index * 0.05}s`;
+                        char.style.animation = 'taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    }, 800 + titleChars.length * 100);
+                });
+
+                // Simulate loading progress
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress > 100) {
+                        progress = 100;
+                        clearInterval(progressInterval);
+
+                        // Remove preloader after completion
+                        setTimeout(() => {
+                            preloader.classList.add('loaded');
+                            setTimeout(() => {
+                                preloader.style.display = 'none';
+                                // Initialize main website functionality
+                                initializeWebsite();
+                            }, 800);
+                        }, 500);
+                    }
+                    progressBar.style.width = `${progress}%`;
+                }, 100);
+            } else {
+                // If no preloader, initialize website immediately
+                initializeWebsite();
+            }
+        });
+
+        function initializeWebsite() {
+            // Custom blue cursor effect
+            const cursor = document.querySelector('.blue-cursor');
+            const follower = document.querySelector('.cursor-follower');
+
+            if (cursor && follower) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+
+                    setTimeout(() => {
+                        follower.style.left = e.clientX - 30 + 'px';
+                        follower.style.top = e.clientY - 30 + 'px';
+                    }, 50);
+                });
+
+                // Interactive cursor effects
+                document.addEventListener('mousedown', () => {
+                    cursor.style.transform = 'scale(0.7)';
+                    follower.style.transform = 'scale(1.3)';
+                });
+
+                document.addEventListener('mouseup', () => {
+                    cursor.style.transform = 'scale(1)';
+                    follower.style.transform = 'scale(1)';
+                });
+
+                // Interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .logo, .home-btn, .project-card, .feature-card');
+
+                interactiveElements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        cursor.style.transform = 'scale(1.5)';
+                        cursor.style.backgroundColor = '#00ffcc';
+                        follower.style.transform = 'scale(1.5)';
+                        follower.style.borderColor = 'rgba(0, 255, 204, 0.5)';
+                    });
+
+                    element.addEventListener('mouseleave', () => {
+                        cursor.style.transform = 'scale(1)';
+                        cursor.style.backgroundColor = '#00aaff';
+                        follower.style.transform = 'scale(1)';
+                        follower.style.borderColor = 'rgba(0, 170, 255, 0.3)';
+                    });
+                });
+            }
+
+            // Create floating particles
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+
+            if (particlesContainer) {
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+
+                    // Random size
+                    const size = Math.random() * 10 + 5;
+                    particle.style.width = size + 'px';
+                    particle.style.height = size + 'px';
+
+                    // Random position
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.top = Math.random() * 100 + 'vh';
+
+                    // Random color variation
+                    const blueShade = Math.random() > 0.5 ? '#00aaff' : '#00ffcc';
+                    particle.style.backgroundColor = blueShade;
+
+                    // Random animation delay and duration
+                    const delay = Math.random() * 15;
+                    const duration = Math.random() * 10 + 15;
+                    particle.style.animationDelay = delay + 's';
+                    particle.style.animationDuration = duration + 's';
+
+                    particlesContainer.appendChild(particle);
+                }
+            }
+
+            // Animate project cards on scroll
+            const projectCards = document.querySelectorAll('.project-card');
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            projectCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+
+            // Add hover effect to coming soon container
+            const comingSoonContainer = document.querySelector('.coming-soon-container');
+            if (comingSoonContainer) {
+                comingSoonContainer.addEventListener('mouseenter', () => {
+                    comingSoonContainer.style.transform = 'scale(1.02)';
+                    comingSoonContainer.style.transition = 'transform 0.3s ease';
+                });
+
+                comingSoonContainer.addEventListener('mouseleave', () => {
+                    comingSoonContainer.style.transform = 'scale(1)';
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
