@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | GameLiminals - Adamas Game Development Club</title>
+    <meta name="description" content="Join exciting game development events, workshops, tournaments and game jams organized by GameLiminals Club at Adamas University">
+    <link rel="shortcut icon" href="assests/logo.png" type="image/x-icon">
+    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
+
+    <!-- Events Page Specific Styles -->
+    <link rel="stylesheet" href="events.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <div class="logo-image-container">
+                    <img src="assests/logo2.png" alt="GameLiminals Logo" class="preloader-logo-img">
+                </div>
+                <h1 class="preloader-title">
+                    <span class="title-char">G</span>
+                    <span class="title-char">a</span>
+                    <span class="title-char">m</span>
+                    <span class="title-char">e</span>
+                    <span class="title-char">L</span>
+                    <span class="title-char">i</span>
+                    <span class="title-char">m</span>
+                    <span class="title-char">i</span>
+                    <span class="title-char">n</span>
+                    <span class="title-char">a</span>
+                    <span class="title-char">l</span>
+                    <span class="title-char">s</span>
+                </h1>
+                <p class="preloader-tagline">
+                    <span class="tagline-char">E</span>
+                    <span class="tagline-char">V</span>
+                    <span class="tagline-char">E</span>
+                    <span class="tagline-char">N</span>
+                    <span class="tagline-char">T</span>
+                    <span class="tagline-char">S</span>
+                </p>
+            </div>
+            <div class="preloader-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="logo-container">
+            <img src="assests/au_logo.jpg" alt="Adamas Logo" class="logo-img">
+            <img src="assests/logo.png" alt="GameLiminals Logo" class="logo-img">
+            <div class="logo-text">
+                <h1 class="logo-title">GameLiminals</h1>
+                <p class="logo-subtitle">ADAMAS GAME DEVELOPMENT CLUB</p>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="events.html" class="nav-link active">Events</a></li>
+                <li><a href="team.html" class="nav-link">Team</a></li>
+                <li><a href="registration.html" class="nav-link">Join Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Events Hero Section -->
+    <section class="events-hero">
+        <div class="container">
+            <div class="events-hero-content">
+                <div class="events-hero-text">
+                    <h1 class="events-title">Upcoming <span class="highlight">Events</span></h1>
+                    <p class="events-subtitle">Join our vibrant community for game jams, workshops, tournaments, and networking events designed for game developers of all levels</p>
+
+                    <!-- Event Stats -->
+                    <div class="events-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon pulse-animation">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="totalEvents">0</h3>
+                                <p>Total Events</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon pulse-animation" style="animation-delay: 0.2s;">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="upcomingEvents">0</h3>
+                                <p>Upcoming</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon pulse-animation" style="animation-delay: 0.4s;">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="tournamentEvents">0</h3>
+                                <p>Tournaments</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon pulse-animation" style="animation-delay: 0.6s;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="workshopEvents">0</h3>
+                                <p>Workshops</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="events-hero-visual">
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"><i class="fas fa-vr-cardboard"></i></div>
+                        <div class="shape shape-2"><i class="fas fa-code-branch"></i></div>
+                        <div class="shape shape-3"><i class="fas fa-chess-board"></i></div>
+                        <div class="shape shape-4"><i class="fas fa-microphone"></i></div>
+                        <div class="shape shape-5"><i class="fas fa-paint-brush"></i></div>
+                    </div>
+                    <div class="hero-glow"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Animated Background Elements -->
+        <div class="background-elements">
+            <div class="bg-element el-1"></div>
+            <div class="bg-element el-2"></div>
+            <div class="bg-element el-3"></div>
+            <div class="bg-element el-4"></div>
+        </div>
+    </section>
+
+    <!-- Events Filter Section -->
+    <section class="events-filter-section">
+        <div class="container">
+            <div class="filter-header">
+                <h2>Discover <span class="highlight">Events</span></h2>
+                <p>Filter events by category or status</p>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    <i class="fas fa-layer-group"></i> All Events
+                </button>
+                <button class="filter-tab" data-filter="upcoming">
+                    <i class="fas fa-rocket"></i> Upcoming
+                </button>
+                <button class="filter-tab" data-filter="ongoing">
+                    <i class="fas fa-play-circle"></i> Ongoing
+                </button>
+                <button class="filter-tab" data-filter="workshop">
+                    <i class="fas fa-chalkboard-teacher"></i> Workshops
+                </button>
+                <button class="filter-tab" data-filter="tournament">
+                    <i class="fas fa-trophy"></i> Tournaments
+                </button>
+                <button class="filter-tab" data-filter="gamejam">
+                    <i class="fas fa-laptop-code"></i> Game Jams
+                </button>
+                <button class="filter-tab" data-filter="closed">
+                    <i class="fas fa-lock"></i> Past Events
+                </button>
+            </div>
+
+            <div class="search-box">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="eventSearch" placeholder="Search events by name, description, or category...">
+                    <button class="clear-search" id="clearSearch">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid Section -->
+    <section class="events-grid-section">
+        <div class="container">
+            <div class="events-grid" id="eventsGrid">
+                <!-- Events will be loaded here dynamically -->
+                <div class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading events...</p>
+                </div>
+            </div>
+
+            <div class="no-events-message" id="noEvents" style="display: none;">
+                <div class="empty-state">
+                    <i class="fas fa-calendar-times"></i>
+                    <h3>No Events Found</h3>
+                    <p>Check back soon for upcoming events or try a different filter</p>
+                    <button class="reset-filters" onclick="resetFilters()">
+                        <i class="fas fa-redo"></i> Reset Filters
+                    </button>
+                </div>
+            </div>
+
+            <div class="load-more-container" id="loadMoreContainer" style="display: none;">
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <i class="fas fa-sync-alt"></i> Load More Events
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Event Banner -->
+    <section class="featured-event-banner" id="featuredBanner" style="display: none;">
+        <div class="container">
+            <div class="featured-content">
+                <div class="featured-badge">
+                    <i class="fas fa-star"></i> Featured Event
+                </div>
+                <div class="featured-info">
+                    <h3 id="featuredTitle"></h3>
+                    <p id="featuredDescription"></p>
+                    <div class="featured-meta">
+                        <span class="meta-item"><i class="far fa-calendar"></i> <span id="featuredDate"></span></span>
+                        <span class="meta-item"><i class="far fa-clock"></i> <span id="featuredTime"></span></span>
+                        <span class="meta-item"><i class="fas fa-map-marker-alt"></i> <span id="featuredLocation"></span></span>
+                    </div>
+                </div>
+                <a href="#" class="featured-register-btn" id="featuredRegisterBtn">
+                    <i class="fas fa-user-plus"></i> Register Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration CTA Section -->
+    <section class="registration-cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Ready to Level Up Your Game Dev Skills?</h2>
+                    <p>Join our events and connect with fellow game developers. Whether you're a beginner or pro, there's something for everyone!</p>
+                    <div class="cta-features">
+                        <div class="feature">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certificates for Participants</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-award"></i>
+                            <span>Exciting Prizes & Rewards</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-network-wired"></i>
+                            <span>Networking Opportunities</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>Mentorship & Guidance</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-actions">
+                    <a href="eventreg.html" class="cta-button primary large">
+                        <i class="fas fa-user-plus"></i> Register for New Event
+                    </a>
+                    <a href="registration.html" class="cta-button secondary">
+                        <i class="fas fa-users"></i> Join Our Club
+                    </a>
+                    <button class="cta-button outline" onclick="scrollToEvents()">
+                        <i class="fas fa-calendar-alt"></i> View All Events
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>GameLiminals</h3>
+                        <p>Adamas Game Development Club</p>
+                    </div>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Department of Computer Science<br> Adamas University<br> Kolkata, West Bengal
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="events.html">Events</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Learning Materials</a></li>
+                        <li><a href="#">Game Assets</a></li>
+                        <li><a href="#">Software Guides</a></li>
+                        <li><a href="#">Club Constitution</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/5hZsZmcC" class="social-link"><i class="fab fa-discord"></i> Discord</a>
+                        <a href="https://github.com/gameliminals" class="social-link"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.instagram.com/gameliminals?igsh=b2V3NzRidDd3OHF6" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/company/gameliminals/" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.facebook.com/gameliminals" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="https://www.youtube.com/@GameLiminals" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                    <p class="footer-email">
+                        <i class="fas fa-envelope"></i> adamasgamingclub@gmail.com
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 GameLiminals Game Development Club. Official club of Adamas University. All rights reserved.</p>
+                <p class="footer-note">Approved by Department of Computer Science & Student Facility Centre</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Event Details Modal -->
+    <div class="event-modal-overlay" id="eventModal">
+        <div class="event-modal">
+            <div class="modal-header">
+                <h3 id="modalTitle"></h3>
+                <button class="modal-close" onclick="closeEventModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded dynamically -->
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" onclick="closeEventModal()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+                <a href="#" class="modal-btn primary" id="modalRegisterBtn">
+                    <i class="fas fa-user-plus"></i> Register Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Combined Script -->
+    <script src="events.js"></script>
+</body>
+
+</html>
