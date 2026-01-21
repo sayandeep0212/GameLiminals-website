@@ -383,9 +383,9 @@ function filterEvents() {
             );
             break;
 
-        case 'tournament':
+        case 'hackathon':
             filtered = filtered.filter(event =>
-                event.category && event.category.toLowerCase().includes('tournament')
+                event.category && event.category.toLowerCase().includes('hackathon')
             );
             break;
 
@@ -575,7 +575,7 @@ function getDefaultEventImage(category) {
     
     if (categoryLower.includes('workshop')) {
         return 'https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
-    } else if (categoryLower.includes('tournament')) {
+    } else if (categoryLower.includes('hackathon')) {
         return 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
     } else if (categoryLower.includes('gamejam') || categoryLower.includes('game jam')) {
         return 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
@@ -707,7 +707,7 @@ function updateStats(events) {
     // Update DOM elements
     const totalEventsEl = document.getElementById('totalEvents');
     const upcomingEventsEl = document.getElementById('upcomingEvents');
-    const tournamentEventsEl = document.getElementById('tournamentEvents');
+    const hackathonEventsEl = document.getElementById('hackathonEvents');
     const workshopEventsEl = document.getElementById('workshopEvents');
     
     if (totalEventsEl) totalEventsEl.textContent = events.length;
@@ -718,11 +718,11 @@ function updateStats(events) {
     }).length;
     if (upcomingEventsEl) upcomingEventsEl.textContent = upcoming;
     
-    // Tournament events
-    const tournaments = events.filter(event => 
-        event.category && event.category.toLowerCase().includes('tournament')
+    // hackathon events
+    const hackathons = events.filter(event => 
+        event.category && event.category.toLowerCase().includes('hackathon')
     ).length;
-    if (tournamentEventsEl) tournamentEventsEl.textContent = tournaments;
+    if (hackathonEventsEl) hackathonEventsEl.textContent = hackathons;
     
     // Workshop events
     const workshops = events.filter(event => 
