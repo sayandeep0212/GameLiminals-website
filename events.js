@@ -1,5 +1,5 @@
 // ==============================================
-// COMBINED SCRIPT FOR EVENTS PAGE
+// COMBINED SCRIPT FOR EVENTS PAGE - UPDATED FOR RESPONSIVE
 // ==============================================
 
 // Firebase Configuration
@@ -19,13 +19,13 @@ let allEvents = [];
 let filteredEvents = [];
 let currentFilter = 'all';
 let searchTerm = '';
-let eventsPerPage = 9;
+let eventsPerPage = 6; // Reduced for better mobile performance
 let currentPage = 1;
 let hasMoreEvents = true;
 
 // ========== PRELOADER & BASIC FUNCTIONALITY ==========
 
-// Preloader Animation
+// Preloader Animation - Updated to match about page
 function initializePreloader() {
     const preloader = document.querySelector('.preloader');
     const progressBar = document.querySelector('.progress-bar');
@@ -33,6 +33,12 @@ function initializePreloader() {
     const taglineChars = document.querySelectorAll('.tagline-char');
 
     if (preloader) {
+        // Animate logo floating
+        const logo = document.querySelector('.preloader-logo-img');
+        if (logo) {
+            logo.style.animation = 'logoFloat 3s ease-in-out infinite';
+        }
+
         // Animate title characters with delay
         titleChars.forEach((char, index) => {
             setTimeout(() => {
@@ -82,7 +88,7 @@ function initializePreloader() {
 function initializeCustomCursor() {
     const cursor = document.querySelector('.cursor');
 
-    if (cursor && window.innerWidth > 768) {
+    if (cursor) {
         let mouseX = 0,
             mouseY = 0;
         let cursorX = 0,
@@ -102,7 +108,7 @@ function initializeCustomCursor() {
 
             // Add hover effect on interactive elements
             const target = e.target;
-            const isInteractive = target.matches('a, button, .cta-button, .nav-link, .filter-tab, .btn-details, .btn-register, .modal-btn, .reset-filters, .load-more-btn, .clear-search');
+            const isInteractive = target.matches('a, button, .cta-button, .value-card, .wwd-card, .community-feature, .achievement-card, .skill-item, .game-element, .wwd-icon-item, .nav-link, .filter-tab, .btn-details, .btn-register, .modal-btn, .reset-filters, .load-more-btn, .clear-search');
 
             if (isInteractive) {
                 cursor.classList.add('hover');
@@ -111,18 +117,17 @@ function initializeCustomCursor() {
             }
         });
 
-        animateCursor();
-    } else if (cursor) {
-        cursor.style.display = 'none';
-    }
-
-    // Hide cursor on mobile
-    window.addEventListener('resize', () => {
-        const cursor = document.querySelector('.cursor');
-        if (cursor) {
-            cursor.style.display = window.innerWidth <= 768 ? 'none' : 'block';
+        // Hide cursor on mobile
+        if (window.innerWidth <= 768) {
+            cursor.style.display = 'none';
         }
-    });
+
+        window.addEventListener('resize', () => {
+            cursor.style.display = window.innerWidth <= 768 ? 'none' : 'block';
+        });
+
+        animateCursor();
+    }
 }
 
 // ========== MOBILE NAVIGATION ==========
@@ -135,13 +140,6 @@ function initializeMobileNavigation() {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
-
-            // Toggle body scroll
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
         });
 
         // Close menu when clicking links
@@ -149,19 +147,7 @@ function initializeMobileNavigation() {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
             });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (navMenu.classList.contains('active') &&
-                !e.target.closest('.nav-menu') &&
-                !e.target.closest('.hamburger')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
         });
     }
 }
@@ -171,16 +157,14 @@ function initializeMobileNavigation() {
 function initializeSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
+            if (this.getAttribute('href') === '#') return;
 
-            // Only handle internal links that start with #
-            if (href === '#' || href.startsWith('http')) return;
-
-            e.preventDefault();
-            const targetId = href;
-
+            // Check if it's a same-page anchor
+            const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            if (targetElement) {
+
+            if (targetElement && !this.getAttribute('href').includes('.html')) {
+                e.preventDefault();
                 window.scrollTo({
                     top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
@@ -190,12 +174,30 @@ function initializeSmoothScrolling() {
     });
 }
 
+// ========== ACTIVE NAV LINK ==========
+
+function setActiveNavLink() {
+    const currentPage = window.location.pathname.split('/').pop();
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage ||
+            (currentPage === '' && link.getAttribute('href') === 'index.html') ||
+            (link.getAttribute('href').includes('events') && currentPage.includes('events'))) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+}
+
 // ========== MAIN INITIALIZATION ==========
 
 function initializeWebsite() {
     initializeCustomCursor();
     initializeMobileNavigation();
     initializeSmoothScrolling();
+    setActiveNavLink();
 
     // Initialize Firebase and events functionality
     initializeFirebase();
@@ -776,16 +778,18 @@ function handleFilterChange(filter) {
     currentFilter = filter;
     filterEvents();
     
-    // Scroll to events grid
-    setTimeout(() => {
-        const eventsSection = document.querySelector('.events-grid-section');
-        if (eventsSection) {
-            eventsSection.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    }, 300);
+    // Scroll to events grid on mobile
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            const eventsSection = document.querySelector('.events-grid-section');
+            if (eventsSection) {
+                eventsSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, 300);
+    }
 }
 
 // Handle search
