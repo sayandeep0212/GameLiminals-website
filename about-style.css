@@ -1562,6 +1562,9 @@ footer {
     body {
         cursor: auto;
     }
+    .preloader-title {
+        font-size: 2.5rem;
+    }
     .cursor {
         display: none;
     }
@@ -1622,6 +1625,9 @@ footer {
     .animated-stats {
         flex-direction: column;
         align-items: center;
+    }
+        .preloader-title {
+        font-size: 2.5rem;
     }
     .animated-stat {
         width: 100%;
