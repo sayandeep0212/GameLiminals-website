@@ -703,23 +703,50 @@ footer {
 
 
 /* Responsive Design */
+/* ==================== UPDATED RESPONSIVE DESIGN ==================== */
 
+/* Large Tablets */
 @media (max-width: 992px) {
     .hero-content {
         grid-template-columns: 1fr;
+        text-align: center;
         gap: 3rem;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    .hero-title {
+        font-size: 3rem; /* Slightly bigger */
+    }
+    .hero-subtitle {
+        font-size: 1.1rem; /* Smaller */
+    }
+    .hero-description {
+        font-size: 1rem; /* Adjusted */
+        padding: 0 1rem;
+    }
+    .hero-buttons {
+        justify-content: center;
+        gap: 1rem;
+    }
+    .cta-button {
+        min-width: 200px; /* Smaller width */
+        justify-content: center;
     }
     .footer-content {
         grid-template-columns: repeat(2, 1fr);
-    }
-    .hero-title {
-        font-size: 2.5rem;
+        gap: 2rem;
     }
     .preloader-title {
-        font-size: 2.8rem;
+        font-size: 3.2rem; /* Bigger */
+    }
+    .logo-image-container {
+        width: 180px; /* Bigger */
+        height: 180px; /* Bigger */
     }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
     body {
         cursor: auto;
@@ -727,6 +754,8 @@ footer {
     .cursor {
         display: none;
     }
+    
+    /* Navigation */
     .hamburger {
         display: flex;
     }
@@ -747,46 +776,107 @@ footer {
     .nav-menu.active {
         left: 0;
     }
+    
+    /* Hero Section */
     .hero {
-        padding: 120px 5% 60px;
+        padding: 120px 0 60px;
     }
     .hero-title {
-        font-size: 2.2rem;
+        font-size: 2.8rem; /* Bigger */
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
+       
     }
     .hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem; /* Smaller */
+        margin-bottom: 1rem;
     }
+    .hero-description {
+        font-size: 0.95rem; /* Responsive */
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        margin-right: 0%;
+    }
+    .hero-buttons {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        width: 100%;
+    }
+    .cta-button {
+        min-width: 160px; /* Smaller width for mobile */
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: auto;
+        flex: 0 0 auto;
+    }
+    .hero-image {
+        padding: 1.5rem;
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    .code-snippet {
+        font-size: 0.8rem;
+        padding: 1.2rem;
+    }
+    
+    /* Footer */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
     }
-    .social-links {
-        align-items: center;
+    .social-link:hover {
+        transform: none;
     }
+    .footer-address {
+        text-align: center;
+    }
+    
+    /* Preloader - Match registration page but bigger */
     .preloader-title {
-        font-size: 2.2rem;
-        letter-spacing: 1px;
-        gap: 1px;
-    }
-    .preloader-tagline {
-        font-size: 1rem;
-        letter-spacing: 1px;
+        font-size: 3.8rem; /* Bigger */
+        letter-spacing: 1.5px;
         gap: 2px;
     }
+    .preloader-tagline {
+        font-size: 1.1rem; /* Bigger */
+        letter-spacing: 1px;
+        gap: 2px;
+        margin-top: 0.5rem;
+    }
     .logo-image-container {
-        width: 120px;
-        height: 120px;
+        width: 300px; /* Bigger */
+        height: 300px; /* Bigger */
+    }
+    .preloader-logo-img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
     }
 }
 
+/* Small Mobile */
 @media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.4rem; /* Bigger */
+    }
+    .hero-subtitle {
+        font-size: 0.95rem; /* Smaller */
+    }
+    .hero-description {
+        font-size: 0.9rem; /* Adjusted */
+    }
     .hero-buttons {
         flex-direction: column;
+        align-items: center;
         width: 100%;
     }
     .cta-button {
         width: 100%;
-        justify-content: center;
+        max-width: 250px; /* Constrained width */
+        min-width: 180px; /* Minimum width */
+        margin: 0 auto;
     }
     .logo-title {
         font-size: 1.5rem;
@@ -794,16 +884,71 @@ footer {
     .logo-subtitle {
         font-size: 0.7rem;
     }
+    
+    /* Preloader - Bigger */
     .preloader-title {
-        font-size: 1.8rem;
-        gap: 0;
+        font-size: 2.2rem; /* Bigger */
+        gap: 1px;
     }
     .preloader-tagline {
-        font-size: 0.9rem;
-        letter-spacing: 0.5px;
+        font-size: 1rem; /* Bigger */
+        letter-spacing: 0.8px;
     }
     .logo-image-container {
-        width: 100px;
-        height: 100px;
+        width: 130px; /* Bigger */
+        height: 130px; /* Bigger */
+    }
+    .hero-image {
+        padding: 1rem;
+    }
+    .code-snippet {
+        font-size: 0.75rem;
+        padding: 1rem;
+    }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+    .hero-title {
+        font-size: 2rem; /* Bigger */
+    }
+    .hero-subtitle {
+        font-size: 0.9rem; /* Smaller */
+    }
+    .hero-description {
+        font-size: 0.85rem; /* Adjusted */
+    }
+    .cta-button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+        min-width: 150px; /* Even smaller for tiny screens */
+    }
+    .logo-title {
+        font-size: 1.3rem;
+    }
+    .logo-subtitle {
+        font-size: 0.65rem;
+    }
+    .preloader-title {
+        font-size: 1.8rem; /* Bigger */
+    }
+    .preloader-tagline {
+        font-size: 0.9rem; /* Bigger */
+    }
+    .logo-image-container {
+        width: 120px; /* Bigger */
+        height: 120px; /* Bigger */
+    }
+}
+
+/* Special adjustment for very wide buttons on small screens */
+@media (max-width: 400px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cta-button {
+        width: 90%;
+        max-width: 220px;
     }
 }
