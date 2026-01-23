@@ -702,10 +702,11 @@ footer {
 }
 
 
-/* Responsive Design */
 /* ==================== UPDATED RESPONSIVE DESIGN ==================== */
 
+
 /* Large Tablets */
+
 @media (max-width: 992px) {
     .hero-content {
         grid-template-columns: 1fr;
@@ -714,23 +715,31 @@ footer {
     }
     .hero-text {
         max-width: 100%;
+        padding: 0 1rem;
     }
     .hero-title {
-        font-size: 3rem; /* Slightly bigger */
+        font-size: 2.8rem;
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
     }
     .hero-subtitle {
-        font-size: 1.1rem; /* Smaller */
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
     }
     .hero-description {
-        font-size: 1rem; /* Adjusted */
-        padding: 0 1rem;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
     }
     .hero-buttons {
         justify-content: center;
         gap: 1rem;
+        flex-wrap: wrap;
     }
     .cta-button {
-        min-width: 200px; /* Smaller width */
+        min-width: 180px;
+        padding: 0.9rem 1.8rem;
         justify-content: center;
     }
     .footer-content {
@@ -738,23 +747,25 @@ footer {
         gap: 2rem;
     }
     .preloader-title {
-        font-size: 3.2rem; /* Bigger */
+        font-size: 3.2rem;
     }
     .logo-image-container {
-        width: 180px; /* Bigger */
-        height: 180px; /* Bigger */
+        width: 180px;
+        height: 180px;
     }
 }
 
+
 /* Mobile */
+
 @media (max-width: 768px) {
     body {
         cursor: auto;
+        overflow-x: hidden;
     }
     .cursor {
         display: none;
     }
-    
     /* Navigation */
     .hamburger {
         display: flex;
@@ -772,59 +783,78 @@ footer {
         backdrop-filter: blur(20px);
         border-top: 1px solid var(--border-color);
         box-shadow: var(--shadow-medium);
+        z-index: 999;
     }
     .nav-menu.active {
         left: 0;
     }
-    
-    /* Hero Section */
+    /* Hero Section - FIXED */
     .hero {
-        padding: 120px 0 60px;
+        padding: 120px 1rem 60px;
+        min-height: auto;
+        overflow: hidden;
+        position: relative;
+    }
+    .container {
+        padding: 0 1rem;
     }
     .hero-title {
-        font-size: 2.8rem; /* Bigger */
+        font-size: 2.4rem;
         line-height: 1.1;
         margin-bottom: 0.5rem;
-       
+        word-break: break-word;
     }
     .hero-subtitle {
-        font-size: 1rem; /* Smaller */
+        font-size: 1.1rem;
         margin-bottom: 1rem;
     }
     .hero-description {
-        font-size: 0.95rem; /* Responsive */
-        line-height: 1.6;
+        font-size: 0.95rem;
+        line-height: 1.5;
         margin-bottom: 2rem;
-        margin-right: 0%;
+        padding: 0;
     }
     .hero-buttons {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.8rem;
+        flex-direction: column;
+        align-items: center;
         width: 100%;
+        gap: 0.8rem;
     }
     .cta-button {
-        min-width: 160px; /* Smaller width for mobile */
+        width: 100%;
+        max-width: 280px;
         padding: 0.8rem 1.5rem;
         font-size: 0.9rem;
-        width: auto;
-        flex: 0 0 auto;
+        margin: 0 auto;
     }
     .hero-image {
         padding: 1.5rem;
         margin: 0 auto;
         max-width: 100%;
+        box-sizing: border-box;
     }
     .code-snippet {
         font-size: 0.8rem;
-        padding: 1.2rem;
+        padding: 1rem;
+        overflow-x: auto;
     }
-    
-    /* Footer */
+    /* Floating Elements - Adjust for mobile */
+    .floating-elements {
+        display: none;
+        /* Hide floating elements on mobile to prevent layout issues */
+    }
+    /* Footer - FIXED */
+    footer {
+        padding: 2rem 1rem 1.5rem;
+        background: #1a1a1a;
+        width: 100%;
+        overflow: hidden;
+    }
     .footer-content {
         grid-template-columns: 1fr;
+        gap: 2rem;
         text-align: center;
+        margin-bottom: 2rem;
     }
     .social-link:hover {
         transform: none;
@@ -832,40 +862,45 @@ footer {
     .footer-address {
         text-align: center;
     }
-    
-    /* Preloader - Match registration page but bigger */
+    .footer-bottom {
+        padding-top: 1.5rem;
+    }
+    /* Preloader */
     .preloader-title {
-        font-size: 3.8rem; /* Bigger */
-        letter-spacing: 1.5px;
-        gap: 2px;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+        gap: 1px;
     }
     .preloader-tagline {
-        font-size: 1.1rem; /* Bigger */
+        font-size: 1rem;
         letter-spacing: 1px;
         gap: 2px;
         margin-top: 0.5rem;
     }
     .logo-image-container {
-        width: 300px; /* Bigger */
-        height: 300px; /* Bigger */
+        width: 140px;
+        height: 140px;
     }
     .preloader-logo-img {
-        width: 180px;
-        height: 180px;
+        width: 100%;
+        height: 100%;
         object-fit: contain;
     }
 }
 
+
 /* Small Mobile */
+
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 2.4rem; /* Bigger */
+        font-size: 2rem;
     }
     .hero-subtitle {
-        font-size: 0.95rem; /* Smaller */
+        font-size: 1rem;
     }
     .hero-description {
-        font-size: 0.9rem; /* Adjusted */
+        font-size: 0.9rem;
+        padding: 0;
     }
     .hero-buttons {
         flex-direction: column;
@@ -874,81 +909,93 @@ footer {
     }
     .cta-button {
         width: 100%;
-        max-width: 250px; /* Constrained width */
-        min-width: 180px; /* Minimum width */
-        margin: 0 auto;
+        max-width: 250px;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.85rem;
     }
     .logo-title {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .logo-subtitle {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
     }
-    
-    /* Preloader - Bigger */
+    /* Preloader */
     .preloader-title {
-        font-size: 2.2rem; /* Bigger */
-        gap: 1px;
+        font-size: 1.8rem;
+        gap: 0;
     }
     .preloader-tagline {
-        font-size: 1rem; /* Bigger */
+        font-size: 0.85rem;
         letter-spacing: 0.8px;
     }
     .logo-image-container {
-        width: 130px; /* Bigger */
-        height: 130px; /* Bigger */
+        width: 120px;
+        height: 120px;
     }
     .hero-image {
         padding: 1rem;
     }
     .code-snippet {
         font-size: 0.75rem;
-        padding: 1rem;
+        padding: 0.8rem;
     }
 }
+
 
 /* Extra Small Mobile */
+
 @media (max-width: 360px) {
     .hero-title {
-        font-size: 2rem; /* Bigger */
+        font-size: 1.7rem;
     }
     .hero-subtitle {
-        font-size: 0.9rem; /* Smaller */
+        font-size: 0.9rem;
     }
     .hero-description {
-        font-size: 0.85rem; /* Adjusted */
+        font-size: 0.85rem;
     }
     .cta-button {
-        padding: 0.7rem 1.2rem;
-        font-size: 0.85rem;
-        min-width: 150px; /* Even smaller for tiny screens */
+        padding: 0.7rem 1rem;
+        font-size: 0.8rem;
+        max-width: 220px;
     }
     .logo-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     .logo-subtitle {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
     .preloader-title {
-        font-size: 1.8rem; /* Bigger */
+        font-size: 1.6rem;
     }
     .preloader-tagline {
-        font-size: 0.9rem; /* Bigger */
+        font-size: 0.8rem;
     }
     .logo-image-container {
-        width: 120px; /* Bigger */
-        height: 120px; /* Bigger */
+        width: 100px;
+        height: 100px;
     }
 }
 
-/* Special adjustment for very wide buttons on small screens */
-@media (max-width: 400px) {
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
+
+/* Fix for overflow issues */
+
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
     }
-    .cta-button {
-        width: 90%;
-        max-width: 220px;
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+    }
+    /* Ensure code snippet doesn't overflow */
+    .code-animation {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+    .code-snippet {
+        min-width: 0;
     }
 }
