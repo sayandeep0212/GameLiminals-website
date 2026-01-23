@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GAMELIMINALS - Event Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(28, 58, 173, 0.1) 0%, transparent 20%), radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #6366f1;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        .event-info {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timer-container {
+            background-color: rgba(220, 38, 38, 0.15);
+            border: 1px solid #f87171;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        
+        .timer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fecaca;
+            font-family: monospace;
+        }
+        
+        .timer-expired {
+            color: #ef4444;
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .form-container {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid #334155;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #818cf8;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        
+        .required::after {
+            content: " *";
+            color: #f87171;
+        }
+        
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            color: white;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+        
+        .team-section {
+            margin-top: 20px;
+            border-left: 3px solid #6366f1;
+            padding-left: 20px;
+            display: none;
+        }
+        
+        .team-member-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px dashed #475569;
+            position: relative;
+        }
+        
+        .member-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .member-title {
+            color: #60a5fa;
+            font-weight: bold;
+        }
+        
+        .remove-btn {
+            background: #7f1d1d;
+            color: #fecaca;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .add-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        
+        .add-btn:hover {
+            background: #1e40af;
+        }
+        
+        .add-btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+        
+        .submit-btn:disabled {
+            background: #475569;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            transform: translateY(-100px);
+            transition: 0.5s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+        }
+        
+        .success {
+            background: #059669;
+        }
+        
+        .error {
+            background: #dc2626;
+        }
+        
+        .warning {
+            background: #d97706;
+        }
+        
+        .success-box {
+            background: #059669;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .admin-access-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .admin-access-link a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .admin-access-link a:hover {
+            color: #cbd5e1;
+            text-decoration: underline;
+        }
+        
+        .default-event {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            color: #fef3c7;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <i class="fas fa-gamepad logo-icon"></i>
+            <h1>GameLiminals</h1>
+            <p style="color: #94a3b8;">Event Registration Portal</p>
+        </header>
+
+        <!-- Event Info Display (Loaded from Firebase) -->
+        <div class="event-info">
+            <h2 style="color: #60a5fa; margin-bottom: 10px;" id="eventTitle">GameLiminals Event</h2>
+            <p style="color: #cbd5e1;" id="eventDescription">Register for our upcoming event</p>
+
+            <div class="timer-container">
+                <p style="color: #fca5a5; font-size: 0.9rem; text-transform: uppercase;">Registration Closes In</p>
+                <div class="timer" id="countdown">00d 00h 00m 00s</div>
+            </div>
+
+            <div id="defaultEventWarning" class="default-event" style="display: none;">
+                <i class="fas fa-info-circle"></i> Using default event settings. Admin can update event details.
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="regForm">
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-users"></i> Participation Type</h3>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="individual" name="type" value="Individual" checked onchange="toggleTeamMode()">
+                            <label for="individual">Individual (Solo)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="team" name="type" value="Team" onchange="toggleTeamMode()">
+                            <label for="team">Team (Max 4 Members)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="main-label">Your Details</span>
+                    </h3>
+
+                    <div class="form-group" id="team-name-group" style="display:none;">
+                        <label class="required">Team Name</label>
+                        <input type="text" id="teamName" placeholder="Enter creative team name">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="required">Full Name</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Phone (WhatsApp)</label>
+                            <input type="tel" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Gender</label>
+                            <select id="gender" required>
+                                <option value="">Select</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">College</label>
+                            <input type="text" id="college" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Department</label>
+                            <input type="text" id="dept" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Semester</label>
+                            <select id="sem" required>
+                                <option value="">Select</option>
+                                <option value="1">1st</option>
+                                <option value="2">2nd</option>
+                                <option value="3">3rd</option>
+                                <option value="4">4th</option>
+                                <option value="5">5th</option>
+                                <option value="6">6th</option>
+                                <option value="7">7th</option>
+                                <option value="8">8th</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="required">Reg. No</label>
+                            <input type="text" id="regNo" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="team-section-container" class="team-section">
+                    <h3 class="section-title" style="font-size: 1.1rem;">Team Members (Add up to 3 more)</h3>
+                    <div id="members-list"></div>
+                    <button type="button" id="addMemberBtn" class="add-btn" onclick="addMember()">
+                        <i class="fas fa-user-plus"></i> Add Team Member
+                    </button>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <input type="checkbox" id="agreeCheckbox" required style="width: auto;">
+                    <label style="display: inline;">I agree to the rules and regulations.</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-btn">
+                    Submit Registration <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+
+
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <template id="member-template">
+        <div class="team-member-card">
+            <div class="member-header">
+                <span class="member-title">Team Member <span class="num"></span></span>
+                <button type="button" class="remove-btn" onclick="removeMember(this)">Remove</button>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label class="required">Full Name</label>
+                    <input type="text" class="m-name" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Email</label>
+                    <input type="email" class="m-email" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Phone</label>
+                    <input type="tel" class="m-phone" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Gender</label>
+                    <select class="m-gender" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="required">College</label>
+                    <input type="text" class="m-college" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Department</label>
+                    <input type="text" class="m-dept" required>
+                </div>
+                <div class="form-group">
+                    <label class="required">Semester</label>
+                    <select class="m-sem" required>
+                        <option value="">Select</option>
+                        <option value="1">1st</option>
+                        <option value="2">2nd</option>
+                        <option value="3">3rd</option>
+                        <option value="4">4th</option>
+                        <option value="5">5th</option>
+                        <option value="6">6th</option>
+                        <option value="7">7th</option>
+                        <option value="8">8th</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="required">Reg. No</label>
+                    <input type="text" class="m-reg" required>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // --- FIREBASE CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBs1wJlciH3KT9Ra89OBDrZqhs463K_2Xk",
+            authDomain: "auevents-86d81.firebaseapp.com",
+            databaseURL: "https://auevents-86d81-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "auevents-86d81",
+            storageBucket: "auevents-86d81.firebasestorage.app",
+            messagingSenderId: "828989419818",
+            appId: "1:828989419818:web:7033fac054aa5b438a6e53"
+        };
+
+        // Initialize Firebase
+        let database;
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+                console.log("Firebase initialized successfully!");
+            }
+            database = firebase.database();
+        } catch (error) {
+            console.error("Firebase initialization error:", error);
+            showNotification("Database connection failed. Please check console.", "error");
+        }
+
+        // --- EVENT CONFIGURATION (Loaded from Firebase) ---
+        let currentEvent = {};
+        let deadline = new Date("2026-01-31T23:59:59").getTime(); // Default deadline
+        let usingDefaultEvent = false;
+
+        // Load event configuration from Firebase
+        function loadEventFromFirebase() {
+            if (!database) {
+                console.log("No database connection");
+                showDefaultEvent();
+                return;
+            }
+
+            // Listen for real-time updates
+            database.ref("eventConfig/current").on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const config = snapshot.val();
+                    currentEvent = config;
+                    usingDefaultEvent = false;
+
+                    // Update UI
+                    document.getElementById("eventTitle").textContent = currentEvent.name || "GameLiminals Event";
+                    document.getElementById("eventDescription").textContent = currentEvent.description || "Register for our upcoming event";
+
+                    // Update timer
+                    deadline = currentEvent.deadline || new Date("2026-01-31T23:59:59").getTime();
+                    updateTimer();
+
+                    // Hide default warning
+                    document.getElementById("defaultEventWarning").style.display = "none";
+
+                    console.log("Event loaded from Firebase:", currentEvent);
+                } else {
+                    // Show default values
+                    showDefaultEvent();
+                }
+            }, (error) => {
+                console.error("Error reading from Firebase:", error);
+                showDefaultEvent();
+            });
+        }
+
+        function showDefaultEvent() {
+            usingDefaultEvent = true;
+            currentEvent = {
+                name: "GameLiminals Event",
+                description: "Register for our upcoming event"
+            };
+
+            document.getElementById("eventTitle").textContent = currentEvent.name;
+            document.getElementById("eventDescription").textContent = currentEvent.description;
+
+            // Show default warning
+            document.getElementById("defaultEventWarning").style.display = "block";
+
+            console.log("Using default event settings");
+        }
+
+        // --- TIMER LOGIC ---
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = deadline - now;
+            const timerEl = document.getElementById("countdown");
+            const submitBtn = document.getElementById("submitBtn");
+            const form = document.getElementById("regForm");
+
+            if (!timerEl) return;
+
+            if (distance < 0) {
+                timerEl.innerHTML = "REGISTRATION CLOSED";
+                timerEl.classList.add("timer-expired");
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-lock"></i> Registration Closed';
+                }
+                if (form) {
+                    form.style.opacity = "0.7";
+                    form.style.pointerEvents = "none";
+                }
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            timerEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        // --- TEAM MODE LOGIC ---
+        function toggleTeamMode() {
+            const isTeam = document.getElementById("team").checked;
+            const teamSection = document.getElementById("team-section-container");
+            const teamNameGroup = document.getElementById("team-name-group");
+            const mainLabel = document.getElementById("main-label");
+            const membersList = document.getElementById("members-list");
+
+            if (isTeam) {
+                teamSection.style.display = "block";
+                teamNameGroup.style.display = "block";
+                mainLabel.innerHTML = "Team Leader Details";
+            } else {
+                teamSection.style.display = "none";
+                teamNameGroup.style.display = "none";
+                mainLabel.innerHTML = "Your Details";
+                membersList.innerHTML = "";
+                const addBtn = document.getElementById("addMemberBtn");
+                if (addBtn) {
+                    addBtn.disabled = false;
+                    addBtn.innerHTML = '<i class="fas fa-user-plus"></i> Add Team Member';
+                }
+            }
+        }
+
+        // --- ADD/REMOVE MEMBER LOGIC ---
+        function addMember() {
+            const list = document.getElementById("members-list");
+            if (!list) return;
+
+            const currentCount = list.children.length;
+
+            // Max 3 additional members (Leader + 3 = 4 total)
+            if (currentCount >= 3) {
+                showNotification("Maximum team size reached (4 members total)", "error");
+                return;
+            }
+
+            const template = document.getElementById("member-template");
+            if (!template) return;
+
+            const clone = template.content.cloneNode(true);
+            clone.querySelector(".num").innerText = currentCount + 2;
+            list.appendChild(clone);
+
+            // Scroll to the new member
+            const newCard = list.lastElementChild;
+            newCard.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest'
+            });
+
+            // Update button if max reached
+            if (list.children.length >= 3) {
+                const btn = document.getElementById("addMemberBtn");
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-user-slash"></i> Max Team Size Reached';
+            }
+        }
+
+        function removeMember(btn) {
+            const card = btn.closest(".team-member-card");
+            if (card) {
+                card.remove();
+            }
+
+            const addBtn = document.getElementById("addMemberBtn");
+            if (addBtn) {
+                addBtn.disabled = false;
+                addBtn.innerHTML = '<i class="fas fa-user-plus"></i> Add Team Member';
+            }
+
+            // Update member numbers
+            const cards = document.querySelectorAll(".team-member-card");
+            cards.forEach((card, index) => {
+                const numSpan = card.querySelector(".num");
+                if (numSpan) {
+                    numSpan.innerText = index + 2;
+                }
+            });
+        }
+
+        // --- SUBMIT TO FIREBASE ---
+        document.getElementById("regForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            // Check if registration is closed
+            const now = new Date().getTime();
+            if (now > deadline) {
+                showNotification("Registration is closed!", "error");
+                return;
+            }
+
+            const isTeam = document.getElementById("team").checked;
+            const submitBtn = document.getElementById("submitBtn");
+
+            // Validation
+            if (isTeam && document.getElementById("members-list").children.length === 0) {
+                showNotification("Please add at least one team member.", "error");
+                return;
+            }
+
+            if (!document.getElementById("agreeCheckbox").checked) {
+                showNotification("Please agree to the rules and regulations.", "error");
+                return;
+            }
+
+            // Team name validation
+            if (isTeam) {
+                const teamName = document.getElementById("teamName").value.trim();
+                if (!teamName || teamName.length < 2) {
+                    showNotification("Please enter a valid team name (min 2 characters).", "error");
+                    return;
+                }
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+            // 1. Collect Leader Data
+            const leaderData = {
+                name: document.getElementById("fullName").value.trim(),
+                email: document.getElementById("email").value.trim(),
+                phone: document.getElementById("phone").value.trim(),
+                gender: document.getElementById("gender").value,
+                college: document.getElementById("college").value.trim(),
+                dept: document.getElementById("dept").value.trim(),
+                sem: document.getElementById("sem").value,
+                regNo: document.getElementById("regNo").value.trim(),
+                role: isTeam ? "Team Leader" : "Individual",
+                timestamp: new Date().toISOString()
+            };
+
+            // Validate required fields
+            for (const [key, value] of Object.entries(leaderData)) {
+                if (key !== 'role' && key !== 'timestamp' && (!value || value === "")) {
+                    showNotification(`Please fill in all required fields. Missing: ${key}`, "error");
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+                    return;
+                }
+            }
+
+            const allParticipants = [leaderData];
+
+            // 2. Collect Team Members Data
+            if (isTeam) {
+                const memberCards = document.querySelectorAll(".team-member-card");
+                memberCards.forEach((card, index) => {
+                    const memberData = {
+                        name: card.querySelector(".m-name").value.trim(),
+                        email: card.querySelector(".m-email").value.trim(),
+                        phone: card.querySelector(".m-phone").value.trim(),
+                        gender: card.querySelector(".m-gender").value,
+                        college: card.querySelector(".m-college").value.trim(),
+                        dept: card.querySelector(".m-dept").value.trim(),
+                        sem: card.querySelector(".m-sem").value,
+                        regNo: card.querySelector(".m-reg").value.trim(),
+                        role: "Team Member",
+                        memberNumber: index + 2
+                    };
+
+                    // Validate member fields
+                    for (const [key, value] of Object.entries(memberData)) {
+                        if (key !== 'role' && key !== 'memberNumber' && (!value || value === "")) {
+                            showNotification(`Please fill in all details for team member ${index + 2}.`, "error");
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+                            return;
+                        }
+                    }
+
+                    allParticipants.push(memberData);
+                });
+            }
+
+            // 3. Prepare Final Object with Event Information
+            const regID = "REG-" + Date.now();
+            const formData = {
+                registrationID: regID,
+                timestamp: new Date().toISOString(),
+                type: isTeam ? "Team" : "Individual",
+                teamName: isTeam ? document.getElementById("teamName").value.trim() : "N/A",
+                members: allParticipants,
+                status: "confirmed",
+                eventName: currentEvent.name || "GameLiminals Event",
+                eventDescription: currentEvent.description || "Event Registration",
+                registrationDeadline: deadline,
+                registrationDate: new Date().toISOString()
+            };
+
+            // 4. Send to Firebase
+            if (database) {
+                database.ref("registrations/" + regID).set(formData)
+                    .then(() => {
+                        showNotification("✅ Registration Successful! Your ID: " + regID, "success");
+                        console.log("Data saved to Firebase:", formData);
+
+                        // Reset form
+                        document.getElementById("regForm").reset();
+                        document.getElementById("members-list").innerHTML = "";
+
+                        // Show registration ID on screen
+                        const successMsg = document.createElement("div");
+                        successMsg.className = "success-box";
+                        successMsg.innerHTML = `
+                            <h3><i class="fas fa-check-circle"></i> Registration Complete!</h3>
+                            <p>Your Registration ID: <strong style="font-size: 1.2rem;">${regID}</strong></p>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">Please save this ID for future reference.</p>
+                            <p style="font-size: 0.9rem; opacity: 0.9;">Event: ${currentEvent.name || "GameLiminals Event"}</p>
+                            <button onclick="this.parentElement.remove()" style="margin-top:10px; background:white; color:#059669; border:none; padding:5px 15px; border-radius:5px; cursor:pointer;">
+                                Close
+                            </button>
+                        `;
+
+                        const formContainer = document.querySelector(".form-container");
+                        if (formContainer) {
+                            formContainer.appendChild(successMsg);
+                        }
+
+                        // Reset UI
+                        toggleTeamMode();
+                    })
+                    .catch((error) => {
+                        console.error("Firebase error:", error);
+                        showNotification("❌ Registration failed: " + error.message, "error");
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+                    });
+            } else {
+                showNotification("❌ Database connection failed. Please try again.", "error");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+            }
+        });
+
+        function showNotification(msg, type) {
+            const notif = document.getElementById("notification");
+            if (!notif) return;
+
+            notif.innerText = msg;
+            notif.className = "notification " + type;
+            notif.classList.add("show");
+
+            setTimeout(() => {
+                notif.classList.remove("show");
+            }, 3000);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("GameLiminals Registration Portal Loaded");
+
+            // Load event configuration from Firebase
+            loadEventFromFirebase();
+
+            // Start timer
+            setInterval(updateTimer, 1000);
+
+            // Initialize form
+            toggleTeamMode();
+        });
+
+        // Add input validation helpers
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'email') {
+                const email = e.target.value;
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    e.target.style.borderColor = '#ef4444';
+                } else {
+                    e.target.style.borderColor = '#475569';
+                }
+            }
+
+            if (e.target.type === 'tel') {
+                const phone = e.target.value.replace(/\D/g, '');
+                if (phone && phone.length < 10) {
+                    e.target.style.borderColor = '#ef4444';
+                } else {
+                    e.target.style.borderColor = '#475569';
+                }
+            }
+        });
+    </script>
+
+</body>
+
+
+</html>
