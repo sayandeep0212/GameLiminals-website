@@ -330,7 +330,8 @@ header {
 
 .nav-link.active {
     color: var(--primary-color);
-    background: rgba(74, 111, 255, 0.08);
+    background: rgba(74, 111, 255, 0.15);
+    font-weight: 600;
 }
 
 .nav-link::after {
@@ -338,17 +339,17 @@ header {
     position: absolute;
     width: 0;
     height: 3px;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    background: linear-gradient( to right, var(--primary-color), var(--secondary-color));
     left: 50%;
-    bottom: -5px;
-    transition: all 0.3s ease;
+    bottom: -6px;
     transform: translateX(-50%);
+    transition: width 0.3s ease;
     border-radius: 2px;
 }
 
 .nav-link:hover::after,
 .nav-link.active::after {
-    width: 70%;
+    width: 60%;
 }
 
 .hamburger {
@@ -1357,6 +1358,72 @@ footer {
         position: absolute;
         top: 10%;
         left: -10%;
+    }
+    .hamburger {
+        display: flex;
+        z-index: 1001;
+        position: relative;
+    }
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 80px;
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.98);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        padding: 2rem 0;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        box-shadow: var(--shadow-medium);
+        z-index: 1000;
+    }
+    .nav-menu.active {
+        left: 0;
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    .cursor {
+        display: none;
+    }
+    /* Adjust header spacing */
+    header {
+        padding: 1rem 5%;
+        justify-content: space-between;
+    }
+    .logo-container {
+        flex: 1;
+        min-width: 0;
+    }
+    .logo-img {
+        height: 50px;
+    }
+    .logo-title {
+        font-size: 1.5rem;
+    }
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+    .nav-link {
+        font-size: 1.2rem;
+    }
+    /* Adjust header for better spacing */
+    header {
+        padding: 0.8rem 5%;
+    }
+    .logo-container {
+        flex: 1;
     }
 }
 
