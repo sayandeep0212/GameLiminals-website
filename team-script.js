@@ -234,7 +234,7 @@ function createSocialLinks(social) {
 // Create tags HTML
 function createTagsHTML(tags) {
     if (!tags || tags.length === 0) {
-        return '<span class="member-tag">Game Developer</span>';
+        return '<span class="member-tag"></span>';
     }
 
     return tags.map(tag => `<span class="member-tag">${tag}</span>`).join('');
@@ -580,4 +580,5 @@ function addInteractiveEffects() {
             }, 200);
         });
     });
+
 }
