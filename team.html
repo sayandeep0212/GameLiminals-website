@@ -769,24 +769,25 @@
         }
 
         // Countdown timer
-        function updateCountdown() {
-            // Set the reveal date (2 weeks from now)
-            const revealDate = new Date("2026-01-01");
-            revealDate.setDate(27);
+function updateCountdown() {
+    const revealDate = new Date(2026, 0, 27, 0, 0, 0); // Jan 27, 12:00 AM IST
 
-            const now = new Date().getTime();
-            const timeRemaining = revealDate - now;
+    const now = new Date().getTime();
+    const timeRemaining = revealDate - now;
 
-            const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+    if (timeRemaining <= 0) return;
 
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-        }
+    const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = String(days).padStart(2, '0');
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
 
         // Update countdown every second
         setInterval(updateCountdown, 1000);
@@ -801,6 +802,7 @@
 </body>
 
 </html>
+
 
 
 
