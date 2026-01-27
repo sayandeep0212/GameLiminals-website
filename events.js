@@ -2,19 +2,8 @@
 // COMBINED SCRIPT FOR EVENTS PAGE - UPDATED FOR RESPONSIVE
 // ==============================================
 
-// Firebase Configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyAe13QXrLdAG0g4Xd98FiaMeyoJCRYi5lM",
-    authDomain: "gameliminals.firebaseapp.com",
-    projectId: "gameliminals",
-    storageBucket: "gameliminals.firebasestorage.app",
-    messagingSenderId: "262478638152",
-    appId: "1:262478638152:web:fd01af842dc2fbaa70fc7d",
-    measurementId: "G-6HSEQ5RZ6P"
-};
-
 // Global variables
-let db;
+
 let allEvents = [];
 let filteredEvents = [];
 let currentFilter = 'all';
@@ -200,31 +189,13 @@ function initializeWebsite() {
     setActiveNavLink();
 
     // Initialize Firebase and events functionality
-    initializeFirebase();
+
     setupEventListeners();
     loadEvents();
     checkURLParameters();
 }
 
-// ========== FIREBASE & EVENTS FUNCTIONALITY ==========
 
-// Initialize Firebase
-function initializeFirebase() {
-    try {
-        // Check if Firebase is already initialized
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-            console.log('Firebase initialized successfully');
-        }
-
-        // Get Firestore instance
-        db = firebase.firestore();
-
-    } catch (error) {
-        console.error('Firebase initialization error:', error);
-        showError('Failed to connect to database. Please refresh the page.');
-    }
-}
 
 // Setup event listeners for events functionality
 function setupEventListeners() {
