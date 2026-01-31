@@ -80,7 +80,7 @@ function initializeWebsite() {
 
             // Add hover effect on interactive elements
             const target = e.target;
-            const isInteractive = target.matches('a, button, .cta-button, .nav-link');
+            const isInteractive = target.matches('a, button, .cta-button, .nav-link, .marquee-item');
 
             if (isInteractive) {
                 cursor.classList.add('hover');
@@ -136,4 +136,82 @@ function initializeWebsite() {
             }
         });
     });
+
+    // Initialize Marquee Effects
+    initializeMarqueeEffects();
 }
+
+// Marquee hover effects
+function initializeMarqueeEffects() {
+    const marqueeItems = document.querySelectorAll('.marquee-item');
+
+    marqueeItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const badge = item.querySelector('.marquee-badge');
+            if (badge) {
+                badge.style.transform = 'scale(1.05)';
+                badge.style.boxShadow = '0 4px 12px rgba(74, 111, 255, 0.4)';
+            }
+        });
+
+        item.addEventListener('mouseleave', () => {
+            const badge = item.querySelector('.marquee-badge');
+            if (badge) {
+                badge.style.transform = 'scale(1)';
+                badge.style.boxShadow = 'none';
+            }
+        });
+    });
+
+    // Adjust marquee speed based on screen size
+    function adjustMarqueeSpeed() {
+        const marqueeContent = document.querySelector('.marquee-content');
+        if (!marqueeContent) return;
+
+        if (window.innerWidth <= 768) {
+            marqueeContent.style.animationDuration = '25s';
+        } else if (window.innerWidth <= 992) {
+            marqueeContent.style.animationDuration = '30s';
+        } else {
+            marqueeContent.style.animationDuration = '40s';
+        }
+    }
+
+    // Adjust speed on load and resize
+    adjustMarqueeSpeed();
+    window.addEventListener('resize', adjustMarqueeSpeed);
+
+    // Pause on hover (desktop only)
+    const marqueeSection = document.querySelector('.marquee-section');
+    if (marqueeSection && window.innerWidth > 768) {
+        marqueeSection.addEventListener('mouseenter', () => {
+            const marqueeContent = marqueeSection.querySelector('.marquee-content');
+            if (marqueeContent) {
+                marqueeContent.style.animationPlayState = 'paused';
+            }
+        });
+
+        marqueeSection.addEventListener('mouseleave', () => {
+            const marqueeContent = marqueeSection.querySelector('.marquee-content');
+            if (marqueeContent) {
+                marqueeContent.style.animationPlayState = 'running';
+            }
+        });
+    }
+
+    // Handle reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const marqueeContent = document.querySelector('.marquee-content');
+        if (marqueeContent) {
+            marqueeContent.style.animation = 'none';
+            marqueeContent.style.justifyContent = 'flex-start';
+            marqueeContent.style.flexWrap = 'wrap';
+            marqueeContent.style.gap = '1rem';
+        }
+    }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Any additional initialization can go here
+});
