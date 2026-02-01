@@ -1,0 +1,31 @@
+# GameLiminals - Adamas University Game Development Club
+
+> The official game development hub of Adamas University, empowering the next generation of creators through a dynamic, responsive ecosystem.
+
+## Core Features
+- Smart Event Engine: Real-time updates via Firebase, automated ticketing, and QR-based validation.
+- Live Team Directory: Dynamic member cards with real-time availability status (Online/Busy/Away).
+- Exclusive Member Portal: Induction system restricted to Adamas University students.
+- Scalable Admin Panel: Custom dashboard for real-time content and member management.
+
+## Tech Stack
+- Frontend: HTML5, CSS3, JavaScript (ES6+).
+- Backend: Firebase Realtime Database & Storage.
+- Hosting: Vercel.
+
+## Site Structure
+- Home: https://gameliminals.vercel.app/ (Announcements & Hero)
+- About: https://gameliminals.vercel.app/about (Mission & Journey)
+- Events: https://gameliminals.vercel.app/events (Live events from Firebase)
+- Team: https://gameliminals.vercel.app/team (Member directory)
+- Projects: https://gameliminals.vercel.app/projects (Coming Soon - Member-built games)
+
+## For Developers
+- Repository: https://github.com/your-username/gameliminals-web (Replace with your actual link)
+- Setup: Clone, navigate, and run via Live Server.
+- Primary Contact: Sayandeep Pradhan (Technical Lead)
+
+## Future Roadmap
+- Playable project showcase demos.
+- Integrated community discussion forum.
+- Curated game dev resource library.
