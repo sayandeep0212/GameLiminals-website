@@ -1,0 +1,16 @@
+# https://gameliminals.vercel.app/ robots.txt
+# Created for GameLiminals - Adamas Game Development Club
+
+User-agent: *
+Allow: /
+
+# Disallow crawling of administrative and private portals
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /register/
+
+# Sitemaps help search engines find your content faster
+Sitemap: https://gameliminals.vercel.app/sitemap.xml
+
+# Host identification
+Host: https://gameliminals.vercel.app/
