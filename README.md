@@ -83,9 +83,7 @@ cd gameliminals-web
 ## 🧠 Future Upgrades & Roadmap  
 - [ ] **Projects Showcase** – Display games built by members with playable demos.  
 - [ ] **Discussion Forum** – Integrated community board for feedback & collaboration.  
-- [ ] **Resource Library** – Curated assets, tutorials, and tools for game dev.  
-- [ ] **Dark Mode** – User-toggleable theme for better accessibility.  
-- [ ] **Notification System** – Push alerts for events, deadlines, and updates.  
+- [ ] **Resource Library** – Curated assets, tutorials, and tools for game dev.    
 
 ---
 
