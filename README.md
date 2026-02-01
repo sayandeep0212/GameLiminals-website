@@ -66,7 +66,7 @@ GameLiminals isn’t just a website — it’s a **living ecosystem** for game d
 
 1. **Clone the repo**  
 ```bash
-git clone https://github.com/your-username/gameliminals-web.git
+git clone https://github.com/sayandeep0212/GameLiminals-website.git
 ```
 
 2. **Navigate into the project**  
