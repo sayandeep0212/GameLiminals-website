@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | GameLiminals - Adamas University Game Development Club</title>
+    <meta name="title" content="Gallery | GameLiminals - Adamas University Game Development Club">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Step inside the studio at GameLiminals, Adamas University's official game development club. Explore our gallery of Unity engine workshops, 48-hour Game Jams, and student-engineered projects where we turn players into creators.">
+    <meta name="keywords" content="GameLiminals, Adamas University, Game Dev Club, AU Gaming, Student Developers, Kolkata Game Development, Adamas Game Dev Club">
+    <meta name="author" content="Sayandeep Pradhan">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GameLiminals">
+    <meta property="og:url" content="https://gameliminals.vercel.app/">
+    <meta property="og:image" content="https://gameliminals.vercel.app/assets/logo2.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
+    <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap">
+    <style>
+        /* Custom cursor styles - Fixed version */
+        
+        .cursor {
+            position: fixed;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: rgba(74, 111, 255, 0.3);
+            border: 2px solid var(--primary-color, #4a6fff);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s, width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: normal;
+            box-shadow: 0 0 10px rgba(74, 111, 255, 0.5);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .cursor.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 107, 0.3);
+            border-color: var(--secondary-color, #ff6b6b);
+        }
+        
+        .cursor.click {
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(0, 180, 148, 0.4);
+            border-color: var(--accent-color);
+        }
+        /* Mobile optimization for cursor */
+        
+        @media (max-width: 768px) {
+            .cursor {
+                display: none !important;
+            }
+        }
+        /* Character elements */
+        
+        .character {
+            position: absolute;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            z-index: 1;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+        
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+        /* Mobile optimization for characters */
+        
+        @media (max-width: 768px) {
+            .character {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .character {
+                font-size: 1.5rem;
+            }
+        }
+        /* Update card styles with theme-based colors - UPDATED COLORS */
+        
+        .card__article {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+            border: 1px solid rgba(74, 111, 255, 0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+        
+        .card__img {
+            border-radius: 1rem !important;
+            border: 2px solid rgba(74, 111, 255, 0.5) !important;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card__article:hover .card__img {
+            transform: scale(1.05);
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
+        }
+        /* UPDATED CARD DATA COLORS */
+        
+        .card__data {
+            background: rgba(15, 23, 42, 0.95);
+            /* Darker background */
+            border: 1px solid rgba(74, 111, 255, 0.5);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            /* White text color */
+        }
+        
+        .card__title {
+            color: #ffffff;
+            /* White title */
+            font-size: clamp(1rem, 3vw, var(--h2-font-size));
+        }
+        
+        .card__description {
+            color: var(--accent-color);
+            /* Keep accent color for description */
+            font-size: clamp(0.7rem, 2vw, var(--small-font-size));
+        }
+        
+        .card__info {
+            color: #cbd5e1;
+            /* Light gray for info text */
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+        }
+        /* Theme-specific card colors */
+        
+        .card__article[data-theme="workshop"] {
+            border-left: 4px solid #4a6fff;
+        }
+        
+        .card__article[data-theme="competition"] {
+            border-left: 4px solid #ff6b6b;
+        }
+        
+        .card__article[data-theme="game-jam"] {
+            border-left: 4px solid #00b894;
+        }
+        
+        .card__article[data-theme="hackathon"] {
+            border-left: 4px solid #9b59b6;
+        }
+        
+        .card__article[data-theme="seminar"] {
+            border-left: 4px solid #3498db;
+        }
+        
+        .card__article[data-theme="bts"] {
+            border-left: 4px solid #f1c40f;
+        }
+        /* Theme emoji styling */
+        
+        .theme-emoji {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            z-index: 3;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Game icons styling */
+        
+        .game-icon {
+            position: absolute;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--accent-color);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+        
+        .card__article:hover .game-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        /* Logo styling */
+        
+        .logos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            height: 50px;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .logo-gamedev {
+            filter: drop-shadow(0 0 10px rgba(74, 111, 255, 0.3));
+        }
+        
+        .logo-university {
+            filter: drop-shadow(0 0 10px rgba(0, 180, 148, 0.3));
+        }
+        /* Hide button that shouldn't be visible */
+        
+        .card__button {
+            display: none !important;
+        }
+        /* Mobile-specific card fixes */
+        
+        @media (max-width: 768px) {
+            .card__article {
+                min-width: 280px;
+                height: 300px;
+            }
+            .card__img {
+                height: 200px;
+            }
+            .card__data {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .card__article {
+                min-width: 250px;
+                height: 280px;
+            }
+            .card__img {
+                height: 180px;
+            }
+            .theme-emoji {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .card__article {
+                min-width: 220px;
+                height: 260px;
+            }
+            .card__img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="preloader-text-container">
+            <div class="glitch-text" data-text="GAMELIMINALS">
+                GAMELIMINALS
+            </div>
+            <div class="subtitle">GALLERY SECTION</div>
+        </div>
+
+        <div class="gaming-effects">
+            <div class="particles-container"></div>
+            <div class="scanline"></div>
+            <div class="grid-overlay"></div>
+            <div class="pixel-effect"></div>
+        </div>
+
+        <div class="loading-status">
+            <div class="status-text">LOADING GALLERY...</div>
+            <div class="loading-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Header & Navigation (Same as about.html) -->
+    <header>
+        <div class="logo-container">
+            <img src="assets/au_logo.jpg" alt="Adamas Logo" class="logo-img">
+            <img src="assets/logo.png" alt="GameLiminals Logo" class="logo-img">
+            <div class="logo-text">
+                <h1 class="logo-title">GameLiminals</h1>
+                <p class="logo-subtitle">ADAMAS GAME DEVELOPMENT CLUB</p>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="events.html" class="nav-link">Events</a></li>
+                <li><a href="team.html" class="nav-link">Team</a></li>
+                <li><a href="registration.html" class="nav-link">Join Us</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Hero Section -->
+    <section class="main-hero">
+        <h1>Welcome to <span class="highlight">GameLiminals</span></h1>
+        <p>Where Gaming Worlds Collide - Adamas University's Premier Game Development Club</p>
+
+        <!-- Gaming Characters -->
+        <div class="character" style="top: 15%; left: 5%; animation-delay: 0s;">👾</div>
+        <div class="character" style="top: 20%; right: 8%; animation-delay: 1s;">🎮</div>
+        <div class="character" style="bottom: 25%; left: 7%; animation-delay: 2s;">🕹️</div>
+        <div class="character" style="bottom: 20%; right: 6%; animation-delay: 3s;">🎯</div>
+        <div class="character" style="top: 60%; left: 10%; animation-delay: 4s;">⚔️</div>
+        <div class="character" style="top: 40%; right: 12%; animation-delay: 5s;">🛡️</div>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="number">100+</div>
+                <div class="label">Active Members</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">0+</div>
+                <div class="label">Projects</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">1</div>
+                <div class="label">Events</div>
+            </div>
+            <div class="hero-stat">
+                <div class="number">0+</div>
+                <div class="label">Workshops</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="scrolling-section">
+            <h2 class="section-title">Game Dev Events & <span class="highlight">Activities</span></h2>
+            <p class="section-subtitle">Explore our game development workshops, competitions, and events</p>
+
+            <!-- First row - Scroll right -->
+            <div class="scrolling-track track-1">
+                <div class="scrolling-content">
+                    <article class="card__article" id="card1" data-theme="workshop">
+                        <div class="card__badge">Workshop</div>
+                        <div class="theme-emoji">🛠️</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🎮</div>
+                        <img src="assets/workshop2.jpeg" alt="Unity Workshop" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Unity Game Development</span>
+                            <h2 class="card__title">3D Game Creation Workshop</h2>
+                            <p class="card__info">Learn to create 3D games from scratch using Unity Engine. Perfect for beginners and intermediate developers.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card2" data-theme="competition">
+                        <div class="card__badge">Competition</div>
+                        <div class="theme-emoji">🏆</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🧙‍♂️</div>
+                        <img src="assets/competition.jpg" alt="Game Design Competition" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Annual Game Design Challenge</span>
+                            <h2 class="card__title">Game Design Championship</h2>
+                            <p class="card__info">Compete with developers worldwide for the best game design. Cash prizes and industry recognition.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card3" data-theme="game-jam">
+                        <div class="card__badge">Game Jam</div>
+                        <div class="theme-emoji">⏱️</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🚀</div>
+                        <img src="assets/gamejam.jpg" alt="48-Hour Game Jam" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">48-Hour Challenge</span>
+                            <h2 class="card__title">Global Game Jam</h2>
+                            <p class="card__info">Create a complete game in just 48 hours! Theme announced at start. Team up or go solo!</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card4" data-theme="hackathon">
+                        <div class="card__badge">Hackathon</div>
+                        <div class="theme-emoji">💻</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🔫</div>
+                        <img src="assets/hackathon.jpg" alt="VR Hackathon" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">VR/AR Development</span>
+                            <h2 class="card__title">Immersive Tech Hackathon</h2>
+                            <p class="card__info">Build innovative VR/AR experiences using cutting-edge technology. Hardware provided.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card5" data-theme="seminar">
+                        <div class="card__badge">Seminar</div>
+                        <div class="theme-emoji">👨‍💻</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🤖</div>
+                        <img src="assets/seminar.jpg" alt="Industry Seminar" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Industry Insights</span>
+                            <h2 class="card__title">Game Industry Seminar</h2>
+                            <p class="card__info">Learn from industry veterans about game design, production, and career opportunities.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card6" data-theme="bts">
+                        <div class="card__badge">BTS</div>
+                        <div class="theme-emoji">🎬</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🏎️</div>
+                        <img src="assets/bts.jpeg" alt="Behind the Scenes" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Development Process</span>
+                            <h2 class="card__title">Behind The Scenes: GameDev</h2>
+                            <p class="card__info">Exclusive look at our game development process, tools, and team workflows.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Second row - Scroll left -->
+            <div class="scrolling-track track-2">
+                <div class="scrolling-content">
+                    <article class="card__article" id="card7" data-theme="workshop">
+                        <div class="card__badge">Workshop</div>
+                        <div class="theme-emoji">🎮</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">👻</div>
+                        <img src="assets/workshop.jpg" alt="Pixel Art Workshop" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Digital Art & Design</span>
+                            <h2 class="card__title">Pixel Art & Animation Workshop</h2>
+                            <p class="card__info">Master pixel art creation and animation for indie games. No prior experience needed.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card8" data-theme="competition">
+                        <div class="card__badge">Competition</div>
+                        <div class="theme-emoji">🎯</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">♟️</div>
+                        <img src="assets/competition2.jpeg" alt="eSports Tournament" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Multiplayer Showdown</span>
+                            <h2 class="card__title">University eSports Tournament</h2>
+                            <p class="card__info">Compete in popular games with teams from across campuses. Prizes for top performers.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card9" data-theme="game-jam">
+                        <div class="card__badge">Game Jam</div>
+                        <div class="theme-emoji">🎲</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🧩</div>
+                        <img src="assets/gamejam2.jpg" alt="Board Game Jam" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Tabletop Game Design</span>
+                            <h2 class="card__title">Board Game Design Jam</h2>
+                            <p class="card__info">Design and prototype board games in 24 hours. Physical and digital game creation.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card10" data-theme="hackathon">
+                        <div class="card__badge">Hackathon</div>
+                        <div class="theme-emoji">🤖</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">👨‍💻</div>
+                        <img src="assets/hackathon2.png" alt="AI Game Hackathon" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">AI in Games</span>
+                            <h2 class="card__title">AI-Powered Game Hackathon</h2>
+                            <p class="card__info">Implement AI algorithms for NPC behavior, procedural generation, and game optimization.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card11" data-theme="seminar">
+                        <div class="card__badge">Seminar</div>
+                        <div class="theme-emoji">📊</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">🕹️</div>
+                        <img src="assets/seminar2.jpeg" alt="Game Business Seminar" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Business & Marketing</span>
+                            <h2 class="card__title">Game Monetization Seminar</h2>
+                            <p class="card__info">Learn about game publishing, monetization strategies, and marketing for indie developers.</p>
+                        </div>
+                    </article>
+
+                    <article class="card__article" id="card12" data-theme="bts">
+                        <div class="card__badge">BTS</div>
+                        <div class="theme-emoji">🔧</div>
+                        <div class="game-icon" style="top: 15px; left: 50px;">👾</div>
+                        <img src="assets/bts2.jpeg" alt="Tools & Tech" class="card__img">
+                        <button class="love">♥</button>
+                        <div class="card__data">
+                            <span class="card__description">Development Tools</span>
+                            <h2 class="card__title">Tools & Technology Showcase</h2>
+                            <p class="card__info">Behind-the-scenes look at our development pipeline, tools, and technology stack.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Same as about.html) -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>GameLiminals</h3>
+                        <p>Adamas Game Development Club</p>
+                    </div>
+                    <p class="footer-address">
+                        <i class="fas fa-map-marker-alt"></i> Department of Computer Science<br> Adamas University<br> Kolkata, West Bengal
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="registration.html">Register</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Learning Materials</a></li>
+                        <li><a href="#">Game Assets</a></li>
+                        <li><a href="#">Software Guides</a></li>
+                        <li><a href="#">Club Constitution</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="https://discord.gg/5hZsZmcC" class="social-link"><i class="fab fa-discord"></i> Discord</a>
+                        <a href="https://github.com/gameliminals" class="social-link"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://www.instagram.com/gameliminals?igsh=b2V3NzRidDd3OHF6" class="social-link"><i class="fab fa-instagram"></i> Instagram</a>
+                        <a href="https://www.linkedin.com/company/gameliminals/" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="https://www.facebook.com/gameliminals" class="social-link"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="https://www.youtube.com/@GameLiminals" class="social-link"><i class="fab fa-youtube"></i> YouTube</a>
+                    </div>
+                    <p class="footer-email">
+                        <i class="fas fa-envelope"></i> adamasgamingclub@gmail.com
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="copyright">© 2026 GameLiminals Game Development Club. Official club of Adamas University. All rights reserved.</p>
+                <p class="footer-note">Approved by Department of Computer Science & Student Facility Centre</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Preloader functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const preloader = document.getElementById('preloader');
+            const progressFill = document.querySelector('.progress-fill');
+
+            // Check if preloader exists
+            if (!preloader || !progressFill) {
+                console.error('Preloader elements not found');
+                return;
+            }
+
+            // Make preloader visible
+            preloader.style.display = 'flex';
+
+            // Simulate loading progress
+            let progress = 0;
+            const loadingInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) {
+                    progress = 100;
+                    clearInterval(loadingInterval);
+
+                    // Hide preloader after completion
+                    setTimeout(() => {
+                        preloader.classList.add('hide');
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                            // Start animations after preloader is hidden
+                            document.querySelectorAll('.scrolling-content').forEach(content => {
+                                content.style.animationPlayState = 'running';
+                            });
+                        }, 1000);
+                    }, 500);
+                }
+                progressFill.style.width = `${progress}%`;
+            }, 100);
+
+            // Pause animations during loading
+            document.querySelectorAll('.scrolling-content').forEach(content => {
+                content.style.animationPlayState = 'paused';
+            });
+        });
+
+        // Mobile navigation toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }));
+        }
+
+        // Enhanced Custom Cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let animationId = null;
+
+        // Check if device supports hover
+        const hasHover = window.matchMedia('(hover: hover)').matches;
+
+        if (hasHover && cursor) {
+            // Initialize cursor as visible
+            cursor.classList.add('visible');
+
+            // Smooth cursor animation
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.2;
+                cursorY += (mouseY - cursorY) * 0.2;
+
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+
+                animationId = requestAnimationFrame(animateCursor);
+            }
+
+            // Start animation
+            animateCursor();
+
+            // Update mouse position
+            document.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Mouse down effect
+            document.addEventListener('mousedown', () => {
+                cursor.classList.add('click');
+            });
+
+            // Mouse up effect
+            document.addEventListener('mouseup', () => {
+                cursor.classList.remove('click');
+            });
+
+            // Add hover effect to interactive elements
+            const hoverElements = document.querySelectorAll('a, button, .card__article, .social-link, .love, .nav-link');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                });
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+            });
+        } else if (cursor) {
+            // Hide custom cursor on touch devices
+            cursor.style.display = 'none';
+        }
+
+        // Pause animation on hover for scrolling tracks
+        document.querySelectorAll('.scrolling-track').forEach(track => {
+            track.addEventListener('mouseenter', () => {
+                track.style.animationPlayState = 'paused';
+            });
+
+            track.addEventListener('mouseleave', () => {
+                track.style.animationPlayState = 'running';
+            });
+        });
+
+        // Love button functionality
+        document.querySelectorAll('.love').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('active');
+                this.textContent = this.classList.contains('active') ? '♥' : '♡';
+            });
+        });
+
+        // Handle mobile touch events for cards
+        document.querySelectorAll('.card__article').forEach(card => {
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            card.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            }, {
+                passive: true
+            });
+
+            card.addEventListener('touchend', function(e) {
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+
+                // Check if it's a tap (not a swipe)
+                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                    // Simulate hover effect on mobile tap
+                    this.classList.add('mobile-tap');
+                    setTimeout(() => {
+                        this.classList.remove('mobile-tap');
+                    }, 300);
+
+                    // Toggle card data visibility on mobile
+                    const cardData = this.querySelector('.card__data');
+                    if (cardData) {
+                        cardData.classList.toggle('mobile-visible');
+                    }
+                }
+            }, {
+                passive: true
+            });
+        });
+
+        // Clean up animation on page unload
+        window.addEventListener('beforeunload', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        });
+
+        // Add CSS for mobile tap effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @media (hover: none) and (pointer: coarse) {
+                .card__article.mobile-tap {
+                    transform: translateY(-5px);
+                    transition: transform 0.3s ease;
+                }
+                
+                .card__data.mobile-visible {
+                    bottom: 1rem !important;
+                    opacity: 1 !important;
+                }
+                
+                .card__article {
+                    cursor: pointer;
+                }
+            }
+            
+            /* Disable hover effects on mobile */
+            @media (max-width: 768px) {
+                .card__article:hover {
+                    transform: none;
+                }
+                
+                .card__article:hover .card__img {
+                    transform: none;
+                }
+                
+                .scrolling-track:hover .scrolling-content {
+                    animation-play-state: running;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
