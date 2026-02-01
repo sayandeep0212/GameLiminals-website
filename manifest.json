@@ -1,0 +1,33 @@
+{
+  "name": "GameLiminals",
+  "short_name": "GameLiminals",
+  "description": "The official game development hub of Adamas University for creators and developers.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4a6fff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "assests/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assests/logo2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "games", "productivity"],
+  "screenshots": [
+    {
+      "src": "assests/logo2.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "GameLiminals Home Screen"
+    }
+  ]
+}
