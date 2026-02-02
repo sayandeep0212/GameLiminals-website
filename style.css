@@ -1515,12 +1515,12 @@ footer {
 /* ==================== MARQUEE SECTION STYLES ==================== */
 
 .marquee-section {
-    background: linear-gradient(135deg, #0f172a 0%, #1a1a2e 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #ffffff7a 100%);
     padding: 1rem 0;
     margin: 2rem auto;
     border-radius: 10px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(74, 111, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(99, 213, 255, 0.789);
+    border: 1px solid rgba(0, 51, 255, 0.503);
     position: relative;
     overflow: hidden;
     max-width: 1400px;
@@ -1555,7 +1555,7 @@ footer {
 
 .marquee-label i {
     font-size: 1rem;
-    color: white;
+    color: rgb(255, 255, 255);
     z-index: 1;
     animation: pulse 2s infinite;
 }
@@ -1642,7 +1642,7 @@ footer {
 }
 
 .marquee-text {
-    color: #e2e8f0;
+    color: #414040;
     font-weight: 500;
 }
 
