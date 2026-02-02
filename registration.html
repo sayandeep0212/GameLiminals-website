@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <!-- Replace your existing viewport meta tag with this: -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>Student Registration | Join the GameLiminals Community</title>
-<meta name="description" content="Ready to build games? Register now to become an official member of GameLiminals at Adamas University and gain access to exclusive resources and events.">
+    <title>Student Registration | Join the GameLiminals Community</title>
+    <meta name="description" content="Ready to build games? Register now to become an official member of GameLiminals at Adamas University and gain access to exclusive resources and events.">
     <meta name="author" content="Sayandeep Pradhan">
-<meta name="robots" content="index, follow">
-<meta name="language" content="English">
-<meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
 
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="GameLiminals">
-<meta property="og:url" content="https://gameliminals.vercel.app/">
-<meta property="og:image" content="https://gameliminals.vercel.app/assets/logo2.png">
-<meta property="twitter:card" content="summary_large_image">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GameLiminals">
+    <meta property="og:url" content="https://gameliminals.vercel.app/">
+    <meta property="og:image" content="https://gameliminals.vercel.app/assets/logo2.png">
+    <meta property="twitter:card" content="summary_large_image">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
@@ -42,6 +42,7 @@
             --accent-color: #00d4aa;
             --text-dark: #333333;
             --text-light: #666666;
+            --text-lighter: #888888;
             --background-light: #ffffff;
             --background-gray: #f8f9fa;
             --border-color: #e0e0e0;
@@ -65,121 +66,410 @@
             padding: 0 5%;
         }
         /* ==================== PRELOADER ==================== */
+        /* Preloader Styles - Matching about-style.css */
         
-        .preloader {
+        #preloader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background-color: #ffffff;
+            z-index: 99999;
+            /* Highest priority */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        
-        .preloader.loaded {
-            opacity: 0;
-            visibility: hidden;
-        }
-        
-        .preloader-content {
-            display: flex;
             flex-direction: column;
+            /* "Blueprint" Grid Pattern */
+            background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+            background-size: 40px 40px;
+            transition: opacity 0.6s ease-out, visibility 0.6s;
+            overflow: hidden;
+            /* Prevent scrollbars during load */
+        }
+        /* 1. LOGO STYLES */
+        
+        .logo-container2 {
+            position: relative;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            width: 300px;
+            height: 300px;
+            background: #1a1a1a;
+            /* Hexagon Shape */
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 3rem;
-            max-width: 600px;
-            width: 90%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-icon span {
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+        }
+        
+        .logo-ring {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border: 2px dashed #6200ea;
+            /* Electric Purple */
+            border-radius: 50%;
+            animation: spin 8s linear infinite;
+            z-index: 1;
+        }
+        /* 2. TEXT STYLES */
+        
+        h1.brand-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #1a1a1a;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            position: relative;
+            text-align: center;
+            line-height: 1;
+        }
+        /* Glitch Layers */
+        
+        h1.brand-name::before,
+        h1.brand-name::after {
+            content: "GameLiminals";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            opacity: 0.8;
+        }
+        
+        h1.brand-name::before {
+            color: #ff0055;
+            z-index: -1;
+            animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+        }
+        
+        h1.brand-name::after {
+            color: #00f0ff;
+            z-index: -2;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        
+        .tagline-box {
+            background: linear-gradient(255deg, rgba(125, 147, 255, 1) 0%, rgba(252, 70, 107, 1) 100%);
+            color: #fff;
+            padding: 6px 18px;
+            margin-top: 15px;
+            font-size: 1rem;
+            letter-spacing: 3px;
+            transform: skewX(-15deg);
+            display: inline-block;
+            box-shadow: 5px 5px 0px rgba(98, 0, 234, 0.2);
+        }
+        
+        .tagline-text {
+            display: block;
+            transform: skewX(15deg);
+            font-family: 'Share Tech Mono', monospace;
+            /* Ensure you import this font */
+            font-weight: bold;
+        }
+        /* 3. LOADING BAR */
+        
+        .loader-wrapper {
+            margin-top: 45px;
+            width: 300px;
+            max-width: 80%;
             text-align: center;
         }
         
-        .preloader-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-        
-        .logo-image-container {
-            width: 200px;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: logoFloat 3s ease-in-out infinite;
-            position: relative;
-        }
-        
-        .preloader-logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 15px rgba(74, 111, 255, 0.3));
-        }
-        
-        .preloader-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            display: inline-flex;
-            gap: 2px;
+        .loading-text {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0;
+            font-weight: 600;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
             position: relative;
+            overflow: hidden;
+            border-radius: 2px;
         }
         
-        .title-char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(20px) rotateY(90deg);
-            animation: titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            text-shadow: 0 0 10px rgba(74, 111, 255, 0.5), 0 0 20px rgba(74, 111, 255, 0.3), 0 0 30px rgba(74, 111, 255, 0.2);
-            color: #ffffff;
+        .progress-bar-fill {
+            height: 100%;
+            background: #6200ea;
+            width: 0%;
+            box-shadow: 0 0 10px rgba(98, 0, 234, 0.5);
+            animation: fillBar 3s ease-in-out forwards;
+        }
+        /* 4. ANIMATIONS */
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
         }
         
-        .title-char:nth-child(odd) {
-            color: var(--primary-color);
+        @keyframes fillBar {
+            0% {
+                width: 0%;
+            }
+            40% {
+                width: 30%;
+            }
+            70% {
+                width: 70%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        /* Glitch Keyframes */
+        
+        @keyframes glitch-anim-1 {
+            0% {
+                clip-path: inset(20% 0 80% 0);
+                transform: translate(-2px, 0);
+            }
+            20% {
+                clip-path: inset(60% 0 10% 0);
+                transform: translate(2px, 0);
+            }
+            40% {
+                clip-path: inset(40% 0 50% 0);
+                transform: translate(-2px, 0);
+            }
+            60% {
+                clip-path: inset(80% 0 5% 0);
+                transform: translate(2px, 0);
+            }
+            80% {
+                clip-path: inset(10% 0 60% 0);
+                transform: translate(-1px, 0);
+            }
+            100% {
+                clip-path: inset(30% 0 30% 0);
+                transform: translate(1px, 0);
+            }
         }
         
-        .title-char:nth-child(even) {
-            color: var(--accent-color);
+        @keyframes glitch-anim-2 {
+            0% {
+                clip-path: inset(10% 0 60% 0);
+                transform: translate(2px, 0);
+            }
+            20% {
+                clip-path: inset(30% 0 20% 0);
+                transform: translate(-2px, 0);
+            }
+            40% {
+                clip-path: inset(70% 0 10% 0);
+                transform: translate(2px, 0);
+            }
+            60% {
+                clip-path: inset(20% 0 50% 0);
+                transform: translate(-2px, 0);
+            }
+            80% {
+                clip-path: inset(50% 0 30% 0);
+                transform: translate(2px, 0);
+            }
+            100% {
+                clip-path: inset(0% 0 80% 0);
+                transform: translate(-1px, 0);
+            }
+        }
+        /* Helper Class to Hide */
+        
+        .hide-preloader {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none;
+        }
+        /* =========================================
+   RESPONSIVE QUERIES
+   ========================================= */
+        /* Tablet & Small Laptops (Max Width: 992px) */
+        
+        @media (max-width: 992px) {
+            h1.brand-name {
+                font-size: 3rem;
+            }
+            .logo-icon {
+                width: 300px;
+                height: 300px;
+            }
+            .logo-ring {
+                width: 95px;
+                height: 95px;
+            }
+            .logo-icon span {
+                font-size: 28px;
+            }
+        }
+        /* Mobile Devices (Max Width: 600px) */
+        
+        @media (max-width: 600px) {
+            h1.brand-name {
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+            }
+            .tagline-box {
+                font-size: 0.8rem;
+                padding: 5px 12px;
+            }
+            .loader-wrapper {
+                width: 220px;
+                margin-top: 35px;
+            }
+            .logo-icon {
+                width: 200px;
+                height: 200px;
+            }
+            .logo-ring {
+                width: 85px;
+                height: 85px;
+            }
+            .logo-icon span {
+                font-size: 24px;
+            }
+        }
+        /* Mini Mobile / Older Devices (Max Width: 380px) */
+        
+        @media (max-width: 380px) {
+            h1.brand-name {
+                font-size: 1.8rem;
+            }
+            /* Prevent text wrapping */
+            .tagline-box {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+                transform: skewX(-10deg);
+                /* Reduce skew to save space */
+            }
+            .tagline-text {
+                transform: skewX(10deg);
+            }
+            .logo-container {
+                margin-bottom: 15px;
+            }
+            .logo-icon {
+                width: 150px;
+                height: 150px;
+            }
+            .logo-ring {
+                width: 70px;
+                height: 70px;
+            }
+            .logo-icon span {
+                font-size: 20px;
+            }
+            .loader-wrapper {
+                width: 180px;
+                margin-top: 25px;
+            }
+        }
+        /* 6. Animations */
+        
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
         }
         
-        .preloader-tagline {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 3px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-            margin-top: 1rem;
-            font-family: 'Orbitron', sans-serif;
+        @keyframes fillBar {
+            0% {
+                width: 0%;
+            }
+            40% {
+                width: 30%;
+            }
+            70% {
+                width: 70%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        /* Glitch Keyframes */
+        
+        @keyframes glitch-anim-1 {
+            0% {
+                clip-path: inset(20% 0 80% 0);
+                transform: translate(-2px, 0);
+            }
+            20% {
+                clip-path: inset(60% 0 10% 0);
+                transform: translate(2px, 0);
+            }
+            40% {
+                clip-path: inset(40% 0 50% 0);
+                transform: translate(-2px, 0);
+            }
+            60% {
+                clip-path: inset(80% 0 5% 0);
+                transform: translate(2px, 0);
+            }
+            80% {
+                clip-path: inset(10% 0 60% 0);
+                transform: translate(-1px, 0);
+            }
+            100% {
+                clip-path: inset(30% 0 30% 0);
+                transform: translate(1px, 0);
+            }
         }
         
-        .tagline-char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(10px);
-            animation: taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            color: #cbd5e1;
+        @keyframes glitch-anim-2 {
+            0% {
+                clip-path: inset(10% 0 60% 0);
+                transform: translate(2px, 0);
+            }
+            20% {
+                clip-path: inset(30% 0 20% 0);
+                transform: translate(-2px, 0);
+            }
+            40% {
+                clip-path: inset(70% 0 10% 0);
+                transform: translate(2px, 0);
+            }
+            60% {
+                clip-path: inset(20% 0 50% 0);
+                transform: translate(-2px, 0);
+            }
+            80% {
+                clip-path: inset(50% 0 30% 0);
+                transform: translate(2px, 0);
+            }
+            100% {
+                clip-path: inset(0% 0 80% 0);
+                transform: translate(-1px, 0);
+            }
         }
+        /* JS Helper Class */
         
-        .tagline-char:nth-child(odd) {
-            color: var(--secondary-color);
-        }
-        
-        .tagline-char:nth-child(even) {
-            color: #ffffff;
-        }
-        
-        .tagline-space {
-            width: 10px;
+        .hide-preloader {
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
         
         .preloader-progress {
@@ -383,7 +673,7 @@
         
         .hero {
             padding: 140px 0 80px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: #ffffff;
         }
         
         .hero-content {
@@ -403,7 +693,7 @@
             line-height: 1.2;
             margin-bottom: 1rem;
             font-family: 'Orbitron', sans-serif;
-            color: white;
+            color: rgb(0, 0, 0);
         }
         
         .highlight {
@@ -416,16 +706,17 @@
         
         .hero-subtitle {
             font-size: 1.3rem;
-            color: #94a3b8;
+            color: #666666;
             margin-bottom: 1.5rem;
             font-weight: 500;
         }
         
         .hero-description {
             font-size: 1.1rem;
-            color: #cbd5e1;
+            color: #044d85;
             margin-bottom: 2.5rem;
             line-height: 1.8;
+            font-weight: 500;
         }
         
         .hero-buttons {
@@ -450,13 +741,19 @@
         .cta-button.primary {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            box-shadow: var(--shadow-medium);
+            border-right: 8px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 3px solid #000000;
         }
         
         .cta-button.secondary {
             background: white;
             color: var(--primary-color);
-            border: 2px solid var(--border-color);
+            border-right: 8px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 3px solid #000000;
         }
         
         .cta-button:hover {
@@ -468,8 +765,11 @@
             background: white;
             padding: 2rem;
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
+            border-right: 8px solid #000000;
+            border-left: 2px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 2px solid #000000;
         }
         
         .code-animation {
@@ -541,7 +841,10 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-medium);
-            border: 1px solid var(--border-color);
+            border-right: 8px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 3px solid #000000;
             overflow: hidden;
         }
         
@@ -602,7 +905,10 @@
         .form-group textarea {
             width: 100%;
             padding: 0.9rem 1rem;
-            border: 2px solid var(--border-color);
+            border-right: 4px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 4px solid #000000;
+            border-top: 3px solid #000000;
             border-radius: 8px;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
@@ -638,7 +944,10 @@
         .submit-button {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            border: none;
+            border-right: 4px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 4px solid #000000;
+            border-top: 3px solid #000000;
             padding: 1rem 3rem;
             border-radius: 8px;
             font-size: 1.1rem;
@@ -707,7 +1016,10 @@
             background: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
+            border-right: 8px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 3px solid #000000;
             overflow: hidden;
         }
         
@@ -802,6 +1114,10 @@
             font-weight: 500;
             margin-top: 1rem;
             transition: all 0.3s ease;
+            border-right: 4px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 4px solid #000000;
+            border-top: 3px solid #000000;
         }
         
         .discord-link:hover {
@@ -814,7 +1130,10 @@
             background: linear-gradient(135deg, rgba(255, 107, 107, 0.05), rgba(255, 193, 7, 0.05));
             padding: 2.5rem;
             border-radius: var(--border-radius);
-            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-right: 8px solid #000000;
+            border-left: 3px solid #000000;
+            border-bottom: 8px solid #000000;
+            border-top: 3px solid #000000;
             margin-top: 3rem;
         }
         
@@ -845,7 +1164,10 @@
             padding: 1rem;
             background: white;
             border-radius: 8px;
-            border: 1px solid var(--border-color);
+            border-right: 4px solid #000000;
+            border-left: 2px solid #000000;
+            border-bottom: 4px solid #000000;
+            border-top: 2px solid #000000;
         }
         
         .note i {
@@ -1710,51 +2032,21 @@
 
 <body>
     <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <div class="preloader-logo">
-                <div class="logo-image-container">
-                    <img src="assets/logo2.png" alt="GameLiminals Logo" class="preloader-logo-img">
-                </div>
-                <h1 class="preloader-title">
-                    <span class="title-char">G</span>
-                    <span class="title-char">a</span>
-                    <span class="title-char">m</span>
-                    <span class="title-char">e</span>
-                    <span class="title-char">L</span>
-                    <span class="title-char">i</span>
-                    <span class="title-char">m</span>
-                    <span class="title-char">i</span>
-                    <span class="title-char">n</span>
-                    <span class="title-char">a</span>
-                    <span class="title-char">l</span>
-                    <span class="title-char">s</span>
-                </h1>
-                <p class="preloader-tagline">
-                    <span class="tagline-char">S</span>
-                    <span class="tagline-char">T</span>
-                    <span class="tagline-char">U</span>
-                    <span class="tagline-char">D</span>
-                    <span class="tagline-char">E</span>
-                    <span class="tagline-char">N</span>
-                    <span class="tagline-char">T</span>
-                    <span class="tagline-space">&nbsp;</span>
-                    <span class="tagline-char">R</span>
-                    <span class="tagline-char">E</span>
-                    <span class="tagline-char">G</span>
-                    <span class="tagline-char">I</span>
-                    <span class="tagline-char">S</span>
-                    <span class="tagline-char">T</span>
-                    <span class="tagline-char">R</span>
-                    <span class="tagline-char">A</span>
-                    <span class="tagline-char">T</span>
-                    <span class="tagline-char">I</span>
-                    <span class="tagline-char">O</span>
-                    <span class="tagline-char">N</span>
-                </p>
-            </div>
-            <div class="preloader-progress">
-                <div class="progress-bar"></div>
+    <div id="preloader">
+        <div class="logo-container2">
+            <img src="assets/blackpreloader-logo.jpeg" alt="GameLiminals Logo" class="logo-icon">
+        </div>
+
+        <h1 class="brand-name">GameLiminals</h1>
+
+        <div class="tagline-box">
+            <span class="tagline-text">STUDENT REGISTRATION</span>
+        </div>
+
+        <div class="loader-wrapper">
+            <div class="loading-text">Initializing Assets...</div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill"></div>
             </div>
         </div>
     </div>
@@ -2141,392 +2433,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script>
-        // Preloader Animation - Updated to match about page
-        document.addEventListener('DOMContentLoaded', function() {
-            const preloader = document.querySelector('.preloader');
-            const progressBar = document.querySelector('.progress-bar');
-            const titleChars = document.querySelectorAll('.title-char');
-            const taglineChars = document.querySelectorAll('.tagline-char');
-
-            // Initialize preloader
-            if (preloader) {
-                // Animate logo floating
-                const logo = document.querySelector('.preloader-logo-img');
-                if (logo) {
-                    logo.style.animation = 'logoFloat 3s ease-in-out infinite';
-                }
-
-                // Animate title characters with delay
-                titleChars.forEach((char, index) => {
-                    setTimeout(() => {
-                        char.style.animationDelay = `${index * 0.1}s`;
-                        char.style.animation = 'titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                    }, 100);
-                });
-
-                // Animate tagline characters with delay
-                taglineChars.forEach((char, index) => {
-                    setTimeout(() => {
-                        char.style.animationDelay = `${index * 0.05}s`;
-                        char.style.animation = 'taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                    }, 800 + titleChars.length * 100);
-                });
-
-                // Simulate loading progress
-                let progress = 0;
-                const progressInterval = setInterval(() => {
-                    progress += Math.random() * 15;
-                    if (progress > 100) {
-                        progress = 100;
-                        clearInterval(progressInterval);
-
-                        // Remove preloader after completion
-                        setTimeout(() => {
-                            preloader.classList.add('loaded');
-                            setTimeout(() => {
-                                preloader.style.display = 'none';
-                                // Initialize main website functionality
-                                initializeWebsite();
-                            }, 800);
-                        }, 500);
-                    }
-                    progressBar.style.width = `${progress}%`;
-                }, 100);
-            } else {
-                // If no preloader, initialize website immediately
-                initializeWebsite();
-            }
-        });
-
-        // Initialize main website functionality
-        function initializeWebsite() {
-            const cursor = document.querySelector('.cursor');
-
-            if (cursor) {
-                let mouseX = 0,
-                    mouseY = 0;
-                let cursorX = 0,
-                    cursorY = 0;
-
-                function animateCursor() {
-                    cursorX += (mouseX - cursorX) * 0.15;
-                    cursorY += (mouseY - cursorY) * 0.15;
-                    cursor.style.left = cursorX + 'px';
-                    cursor.style.top = cursorY + 'px';
-                    requestAnimationFrame(animateCursor);
-                }
-
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-
-                    // Add hover effect on interactive elements
-                    const target = e.target;
-                    const isInteractive = target.matches('a, button, .cta-button, .submit-button, .nav-link, .discord-link, .popup-close, .popup-home, .form-group input, .form-group select, .form-group textarea');
-
-                    if (isInteractive) {
-                        cursor.classList.add('hover');
-                    } else {
-                        cursor.classList.remove('hover');
-                    }
-                });
-
-                // Hide cursor on mobile
-                if (window.innerWidth <= 768) {
-                    cursor.style.display = 'none';
-                }
-
-                window.addEventListener('resize', () => {
-                    cursor.style.display = window.innerWidth <= 768 ? 'none' : 'block';
-                });
-
-                animateCursor();
-            }
-
-            // Mobile Navigation - Updated to match about page
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-
-            if (hamburger && navMenu) {
-                hamburger.addEventListener('click', () => {
-                    hamburger.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                });
-
-                // Close menu when clicking links
-                document.querySelectorAll('.nav-link').forEach(link => {
-                    link.addEventListener('click', () => {
-                        hamburger.classList.remove('active');
-                        navMenu.classList.remove('active');
-                    });
-                });
-            }
-
-            // Smooth Scrolling
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            // Initialize form
-            initializeRegistrationForm();
-        }
-
-        // Initialize Registration Form
-        function initializeRegistrationForm() {
-            const form = document.getElementById('studentRegistrationForm');
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (!form) return;
-
-            // Initialize form validation
-            initializeFormValidation();
-
-            // Real-time validation
-            form.addEventListener('input', function(e) {
-                const element = e.target;
-                validateField(element);
-            });
-
-            form.addEventListener('change', function(e) {
-                const element = e.target;
-                validateField(element);
-            });
-        }
-
-        // Initialize Form Validation
-        function initializeFormValidation() {
-            const form = document.getElementById('studentRegistrationForm');
-            const formElements = form.querySelectorAll('input, select, textarea');
-
-            formElements.forEach(element => {
-                // Add error span after each form element
-                if (!element.nextElementSibling || !element.nextElementSibling.classList.contains('form-error')) {
-                    const errorSpan = document.createElement('span');
-                    errorSpan.className = 'form-error';
-                    element.parentNode.insertBefore(errorSpan, element.nextSibling);
-                }
-            });
-        }
-
-        // Validate Individual Field
-        function validateField(element) {
-            const errorElement = element.nextElementSibling;
-            if (!errorElement || !errorElement.classList.contains('form-error')) return;
-
-            // Clear previous errors
-            element.classList.remove('error', 'success');
-            errorElement.classList.remove('active');
-            errorElement.textContent = '';
-
-            // Skip validation for optional fields if empty
-            if (element.id === 'remarks' && element.value.trim() === '') {
-                return true;
-            }
-
-            let isValid = true;
-            let errorMessage = '';
-
-            switch (element.id) {
-                case 'fullName':
-                    if (element.value.trim().length < 3) {
-                        errorMessage = 'Full name must be at least 3 characters';
-                        isValid = false;
-                    }
-                    break;
-
-                case 'email':
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(element.value)) {
-                        errorMessage = 'Please enter a valid email address';
-                        isValid = false;
-                    }
-                    break;
-
-                case 'phone':
-                    const phoneRegex = /^[0-9]{10}$/;
-                    if (!phoneRegex.test(element.value)) {
-                        errorMessage = 'Please enter a valid 10-digit phone number';
-                        isValid = false;
-                    }
-                    break;
-
-                case 'registrationNo':
-                case 'rollNo':
-                case 'department':
-                    if (element.value.trim() === '') {
-                        errorMessage = 'This field is required';
-                        isValid = false;
-                    }
-                    break;
-
-                case 'whyJoin':
-                    if (element.value.trim().length < 20) {
-                        errorMessage = 'Please provide a more detailed response (minimum 20 characters)';
-                        isValid = false;
-                    }
-                    break;
-
-                case 'semester':
-                    if (element.value === '') {
-                        errorMessage = 'Please select your semester';
-                        isValid = false;
-                    }
-                    break;
-
-                default:
-                    if (element.required && element.value.trim() === '') {
-                        errorMessage = 'This field is required';
-                        isValid = false;
-                    }
-            }
-
-            // Update UI
-            if (!isValid) {
-                element.classList.add('error');
-                element.classList.remove('success');
-                errorElement.textContent = errorMessage;
-                errorElement.classList.add('active');
-            } else {
-                element.classList.add('success');
-                element.classList.remove('error');
-            }
-
-            return isValid;
-        }
-
-        // Show Error Message
-        function showError(message) {
-            // Create error toast
-            const toast = document.createElement('div');
-            toast.className = 'error-toast';
-            toast.innerHTML = `
-                <i class="fas fa-exclamation-circle"></i>
-                <span>${message}</span>
-                <button class="toast-close"><i class="fas fa-times"></i></button>
-            `;
-
-            document.body.appendChild(toast);
-
-            // Show toast
-            setTimeout(() => {
-                toast.classList.add('show');
-            }, 10);
-
-            // Close button
-            const closeBtn = toast.querySelector('.toast-close');
-            closeBtn.addEventListener('click', () => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        document.body.removeChild(toast);
-                    }
-                }, 300);
-            });
-
-            // Remove toast after 8 seconds
-            setTimeout(() => {
-                if (toast.parentNode && toast.classList.contains('show')) {
-                    toast.classList.remove('show');
-                    setTimeout(() => {
-                        if (toast.parentNode) {
-                            document.body.removeChild(toast);
-                        }
-                    }, 300);
-                }
-            }, 8000);
-        }
-        // Add this function to detect mobile devices and apply fixes
-        function detectMobileDevice() {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-            // Check for iOS
-            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
-
-            // Check for Samsung/Android
-            const isSamsung = /Samsung|SM-/.test(userAgent);
-
-            if (isIOS || isSamsung) {
-                document.documentElement.classList.add('mobile-device');
-                if (isIOS) document.documentElement.classList.add('ios-device');
-                if (isSamsung) document.documentElement.classList.add('samsung-device');
-            }
-        }
-
-        // Call this function in your DOMContentLoaded or initializeWebsite function
-        document.addEventListener('DOMContentLoaded', function() {
-            detectMobileDevice();
-            // ... rest of your existing code
-        });
-        // Show Success Popup
-        function showSuccessPopup(applicationId) {
-            const popup = document.getElementById('successPopup');
-            const appIdElement = document.getElementById('popupAppId');
-            const dateElement = document.getElementById('popupDate');
-
-            // Set popup data
-            appIdElement.textContent = applicationId;
-            dateElement.textContent = new Date().toLocaleDateString('en-IN', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-            // Show popup
-            popup.classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            // Close popup button
-            const closeBtn = document.getElementById('popupClose');
-            const closeHandler = () => {
-                popup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-                // Redirect to home after a moment
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 500);
-            };
-
-            closeBtn.addEventListener('click', closeHandler);
-
-            // Close popup on background click
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    closeHandler();
-                }
-            });
-
-            // Escape key to close
-            document.addEventListener('keydown', function escHandler(e) {
-                if (e.key === 'Escape' && popup.classList.contains('active')) {
-                    closeHandler();
-                    document.removeEventListener('keydown', escHandler);
-                }
-            });
-        }
-
-        // Handle form submission from Firebase
-        window.showSuccessPopup = showSuccessPopup;
-        window.showError = showError;
-    </script>
+    <script src="registration.js"></script>
 </body>
 
 </html>
-
-
-
-

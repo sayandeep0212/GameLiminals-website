@@ -1,61 +1,31 @@
 // Preloader Animation
 document.addEventListener('DOMContentLoaded', function() {
-    const preloader = document.querySelector('.preloader');
-    const progressBar = document.querySelector('.progress-bar');
-    const titleChars = document.querySelectorAll('.title-char');
-    const taglineChars = document.querySelectorAll('.tagline-char');
+    // Target the ID defined in your HTML
+    const preloader = document.getElementById('preloader');
 
-    // Initialize preloader
     if (preloader) {
-        // Animate logo floating
-        const logo = document.querySelector('.preloader-logo-img');
-        if (logo) {
-            logo.style.animation = 'logoFloat 3s ease-in-out infinite';
-        }
+        // The CSS progress bar takes 3 seconds (3000ms) to fill.
+        // We wait for that, then fade out.
+        setTimeout(() => {
+            // Add the class that sets opacity to 0
+            preloader.classList.add('hide-preloader');
 
-        // Animate title characters with delay
-        titleChars.forEach((char, index) => {
+            // Wait for the fade transition (0.6s) to finish, then hide completely
             setTimeout(() => {
-                char.style.animationDelay = `${index * 0.1}s`;
-                char.style.animation = 'titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            }, 100);
-        });
+                preloader.style.display = 'none';
 
-        // Animate tagline characters with delay
-        taglineChars.forEach((char, index) => {
-            setTimeout(() => {
-                char.style.animationDelay = `${index * 0.05}s`;
-                char.style.animation = 'taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            }, 800 + titleChars.length * 100);
-        });
-
-        // Simulate loading progress
-        let progress = 0;
-        const progressInterval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 100) {
-                progress = 100;
-                clearInterval(progressInterval);
-
-                // Remove preloader after completion
-                setTimeout(() => {
-                    preloader.classList.add('loaded');
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                        // Initialize main website functionality
-                        initializeAboutPage();
-                    }, 800);
-                }, 500);
-            }
-            progressBar.style.width = `${progress}%`;
-        }, 100);
+                // Start the main site animations
+                initializeAboutPage();
+            }, 600);
+        }, 3000);
     } else {
-        // If no preloader, initialize website immediately
+        // If preloader is missing, load immediately
         initializeAboutPage();
     }
 });
 
 // Initialize main page functionality
+// (This section remains exactly as you had it)
 function initializeAboutPage() {
     // Custom Cursor
     const cursor = document.querySelector('.cursor');
@@ -159,7 +129,7 @@ function initializeAboutPage() {
     // Initialize animations on scroll
     initializeScrollAnimations();
 
-    // Start floating elements animation
+    // Start floating animations
     startFloatingAnimations();
 
     // Initialize network animation

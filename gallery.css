@@ -4,156 +4,502 @@
 
 /*=============== PRELOADER ===============*/
 
-.preloader {
+
+/* Preloader Styles - Matching about-style.css */
+
+#preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: #000;
+    height: 100%;
+    background-color: #ffffff;
+    z-index: 99999;
+    /* Highest priority */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
+    flex-direction: column;
+    /* "Blueprint" Grid Pattern */
+    background-image: linear-gradient(#e5e5e5 1px, transparent 1px), linear-gradient(90deg, #e5e5e5 1px, transparent 1px);
+    background-size: 40px 40px;
+    transition: opacity 0.6s ease-out, visibility 0.6s;
     overflow: hidden;
+    /* Prevent scrollbars during load */
 }
 
 
-/* Progress Bar */
+/* 1. LOGO STYLES */
+
+.logo-container2 {
+    position: relative;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 300px;
+    height: 300px;
+    background: #1a1a1a;
+    /* Hexagon Shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-icon span {
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.logo-ring {
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    border: 2px dashed #6200ea;
+    /* Electric Purple */
+    border-radius: 50%;
+    animation: spin 8s linear infinite;
+    z-index: 1;
+}
+
+
+/* 2. TEXT STYLES */
+
+h1.brand-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    position: relative;
+    text-align: center;
+    line-height: 1;
+}
+
+
+/* Glitch Layers */
+
+h1.brand-name::before,
+h1.brand-name::after {
+    content: "GameLiminals";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    opacity: 0.8;
+}
+
+h1.brand-name::before {
+    color: #ff0055;
+    z-index: -1;
+    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+
+h1.brand-name::after {
+    color: #00f0ff;
+    z-index: -2;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.tagline-box {
+    background: linear-gradient(255deg, rgba(125, 147, 255, 1) 0%, rgba(252, 70, 107, 1) 100%);
+    color: #fff;
+    padding: 6px 18px;
+    margin-top: 15px;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    transform: skewX(-15deg);
+    display: inline-block;
+    box-shadow: 5px 5px 0px rgba(98, 0, 234, 0.2);
+}
+
+.tagline-text {
+    display: block;
+    transform: skewX(15deg);
+    font-family: 'Share Tech Mono', monospace;
+    /* Ensure you import this font */
+    font-weight: bold;
+}
+
+
+/* 3. LOADING BAR */
+
+.loader-wrapper {
+    margin-top: 45px;
+    width: 300px;
+    max-width: 80%;
+    text-align: center;
+}
+
+.loading-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #6200ea;
+    width: 0%;
+    box-shadow: 0 0 10px rgba(98, 0, 234, 0.5);
+    animation: fillBar 3s ease-in-out forwards;
+}
+
+
+/* 4. ANIMATIONS */
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fillBar {
+    0% {
+        width: 0%;
+    }
+    40% {
+        width: 30%;
+    }
+    70% {
+        width: 70%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* Glitch Keyframes */
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(20% 0 80% 0);
+        transform: translate(-2px, 0);
+    }
+    20% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(2px, 0);
+    }
+    40% {
+        clip-path: inset(40% 0 50% 0);
+        transform: translate(-2px, 0);
+    }
+    60% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(2px, 0);
+    }
+    80% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(-1px, 0);
+    }
+    100% {
+        clip-path: inset(30% 0 30% 0);
+        transform: translate(1px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(2px, 0);
+    }
+    20% {
+        clip-path: inset(30% 0 20% 0);
+        transform: translate(-2px, 0);
+    }
+    40% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translate(2px, 0);
+    }
+    60% {
+        clip-path: inset(20% 0 50% 0);
+        transform: translate(-2px, 0);
+    }
+    80% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(2px, 0);
+    }
+    100% {
+        clip-path: inset(0% 0 80% 0);
+        transform: translate(-1px, 0);
+    }
+}
+
+
+/* Helper Class to Hide */
+
+.hide-preloader {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   RESPONSIVE QUERIES
+   ========================================= */
+
+
+/* Tablet & Small Laptops (Max Width: 992px) */
+
+@media (max-width: 992px) {
+    h1.brand-name {
+        font-size: 3rem;
+    }
+    .logo-icon {
+        width: 300px;
+        height: 300px;
+    }
+    .logo-ring {
+        width: 95px;
+        height: 95px;
+    }
+    .logo-icon span {
+        font-size: 28px;
+    }
+}
+
+
+/* Mobile Devices (Max Width: 600px) */
+
+@media (max-width: 600px) {
+    h1.brand-name {
+        font-size: 2.2rem;
+        letter-spacing: -1px;
+    }
+    .tagline-box {
+        font-size: 0.8rem;
+        padding: 5px 12px;
+    }
+    .loader-wrapper {
+        width: 220px;
+        margin-top: 35px;
+    }
+    .logo-icon {
+        width: 200px;
+        height: 200px;
+    }
+    .logo-ring {
+        width: 85px;
+        height: 85px;
+    }
+    .logo-icon span {
+        font-size: 24px;
+    }
+}
+
+
+/* Mini Mobile / Older Devices (Max Width: 380px) */
+
+@media (max-width: 380px) {
+    h1.brand-name {
+        font-size: 1.8rem;
+    }
+    /* Prevent text wrapping */
+    .tagline-box {
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        transform: skewX(-10deg);
+        /* Reduce skew to save space */
+    }
+    .tagline-text {
+        transform: skewX(10deg);
+    }
+    .logo-container {
+        margin-bottom: 15px;
+    }
+    .logo-icon {
+        width: 150px;
+        height: 150px;
+    }
+    .logo-ring {
+        width: 70px;
+        height: 70px;
+    }
+    .logo-icon span {
+        font-size: 20px;
+    }
+    .loader-wrapper {
+        width: 180px;
+        margin-top: 25px;
+    }
+}
+
+
+/* 6. Animations */
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fillBar {
+    0% {
+        width: 0%;
+    }
+    40% {
+        width: 30%;
+    }
+    70% {
+        width: 70%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+
+/* Glitch Keyframes */
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(20% 0 80% 0);
+        transform: translate(-2px, 0);
+    }
+    20% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(2px, 0);
+    }
+    40% {
+        clip-path: inset(40% 0 50% 0);
+        transform: translate(-2px, 0);
+    }
+    60% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(2px, 0);
+    }
+    80% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(-1px, 0);
+    }
+    100% {
+        clip-path: inset(30% 0 30% 0);
+        transform: translate(1px, 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(2px, 0);
+    }
+    20% {
+        clip-path: inset(30% 0 20% 0);
+        transform: translate(-2px, 0);
+    }
+    40% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translate(2px, 0);
+    }
+    60% {
+        clip-path: inset(20% 0 50% 0);
+        transform: translate(-2px, 0);
+    }
+    80% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(2px, 0);
+    }
+    100% {
+        clip-path: inset(0% 0 80% 0);
+        transform: translate(-1px, 0);
+    }
+}
+
+
+/* JS Helper Class */
+
+.hide-preloader {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+.preloader-progress {
+    width: 100%;
+    max-width: 400px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 2rem;
+}
 
 .progress-bar {
-    width: 80%;
-    max-width: 600px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-    margin-bottom: 40px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-fill {
-    width: 0%;
     height: 100%;
-    background: linear-gradient(90deg, #4a6fff, #ff6b6b, #00b894);
-    border-radius: 2px;
-    transition: width 0.3s ease;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 4px;
+    transition: width 1.5s cubic-bezier(0.65, 0, 0.35, 1);
     position: relative;
+    overflow: hidden;
 }
 
-.progress-fill::after {
+.progress-bar::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
-    animation: progress-shimmer 1.5s infinite;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: progressShine 2s infinite;
 }
 
-@keyframes progress-shimmer {
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-15px) scale(1.05);
+    }
+}
+
+@keyframes titleReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateY(0);
+    }
+}
+
+@keyframes taglineReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes progressShine {
     0% {
         transform: translateX(-100%);
     }
     100% {
         transform: translateX(100%);
-    }
-}
-
-
-/* Text Styles */
-
-.preloader-text-container {
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-}
-
-.glitch-text {
-    position: relative;
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(1.5rem, 8vw, 4rem);
-    /* Responsive font size */
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin-bottom: 20px;
-    color: #4a6fff;
-    text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    animation: glitch 500ms infinite;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.glitch-text::before {
-    animation: glitch 650ms infinite;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 65%);
-    transform: translate(-0.025em, -0.0125em);
-    opacity: 0.8;
-    color: #ff6b6b;
-}
-
-.glitch-text::after {
-    animation: glitch 375ms infinite;
-    clip-path: polygon(0 65%, 100% 35%, 100% 100%, 0 100%);
-    transform: translate(0.0125em, 0.025em);
-    opacity: 0.8;
-    color: #00b894;
-}
-
-@keyframes glitch {
-    0% {
-        text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    14% {
-        text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.05em 0 rgba(0, 255, 0, 0.75), 0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    15% {
-        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    49% {
-        text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    50% {
-        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    99% {
-        text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-    100% {
-        text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
-    }
-}
-
-.subtitle {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(0.7rem, 3vw, 1.2rem);
-    /* Responsive font size */
-    color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    animation: subtitle-pulse 3s infinite alternate;
-}
-
-@keyframes subtitle-pulse {
-    0%,
-    100% {
-        opacity: 0.7;
-        text-shadow: 0 0 10px rgba(74, 111, 255, 0.3);
-    }
-    50% {
-        opacity: 1;
-        text-shadow: 0 0 20px rgba(74, 111, 255, 0.6), 0 0 30px rgba(255, 107, 107, 0.3);
     }
 }
 
@@ -629,7 +975,7 @@ header {
 .main-hero {
     padding: clamp(100px, 15vw, 140px) 5% clamp(40px, 8vw, 80px);
     /* Responsive padding */
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: #ffffff;
     text-align: center;
     color: white;
     position: relative;
@@ -642,7 +988,7 @@ header {
     font-size: clamp(1.8rem, 8vw, 3.5rem);
     /* Responsive font size */
     margin-bottom: 1rem;
-    color: white;
+    color: rgb(0, 0, 0);
     text-shadow: 0 0 20px rgba(74, 111, 255, 0.5);
     line-height: 1.2;
     padding: 0 10px;
@@ -659,7 +1005,7 @@ header {
 .main-hero p {
     font-size: clamp(0.9rem, 3vw, 1.2rem);
     /* Responsive font size */
-    color: #94a3b8;
+    color: #000000;
     max-width: 700px;
     margin: 0 auto 2rem;
     padding: 0 15px;
@@ -684,12 +1030,12 @@ header {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     /* Responsive font size */
     font-weight: 800;
-    color: var(--accent-color);
+    color: #044d85;
     font-family: 'Orbitron', sans-serif;
 }
 
 .hero-stat .label {
-    color: #94a3b8;
+    color: #000000;
     font-size: clamp(0.7rem, 2vw, 0.9rem);
     /* Responsive font size */
     margin-top: 0.5rem;

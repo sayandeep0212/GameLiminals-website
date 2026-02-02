@@ -1,58 +1,25 @@
 // Preloader Animation
-document.addEventListener('DOMContentLoaded', function() {
-    const preloader = document.querySelector('.preloader');
-    const progressBar = document.querySelector('.progress-bar');
-    const titleChars = document.querySelectorAll('.title-char');
-    const taglineChars = document.querySelectorAll('.tagline-char');
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
 
-    // Initialize preloader
-    if (preloader) {
-        // Animate logo floating
-        const logo = document.querySelector('.preloader-logo-img');
-        if (logo) {
-            logo.style.animation = 'logoFloat 3s ease-in-out infinite';
+    // The CSS animation for the progress bar is set to 3 seconds (3000ms).
+    // We wait for that to finish before hiding the preloader.
+    setTimeout(() => {
+        if (preloader) {
+            // Add the class that sets opacity: 0 (defined in your CSS)
+            preloader.classList.add('hide-preloader');
+
+            // Wait for the fade-out transition (0.6s) to finish, then remove from layout
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                // Initialize the rest of the website features
+                initializeWebsite();
+            }, 600);
+        } else {
+            // Fallback if preloader is missing
+            initializeWebsite();
         }
-
-        // Animate title characters with delay
-        titleChars.forEach((char, index) => {
-            setTimeout(() => {
-                char.style.animationDelay = `${index * 0.1}s`;
-                char.style.animation = 'titleReveal 0.5s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            }, 100);
-        });
-
-        // Animate tagline characters with delay
-        taglineChars.forEach((char, index) => {
-            setTimeout(() => {
-                char.style.animationDelay = `${index * 0.05}s`;
-                char.style.animation = 'taglineReveal 0.4s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            }, 800 + titleChars.length * 100);
-        });
-
-        // Simulate loading progress
-        let progress = 0;
-        const progressInterval = setInterval(() => {
-            progress += Math.random() * 15;
-            if (progress > 100) {
-                progress = 100;
-                clearInterval(progressInterval);
-
-                // Remove preloader after completion
-                setTimeout(() => {
-                    preloader.classList.add('loaded');
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                        // Initialize main website functionality
-                        initializeWebsite();
-                    }, 800);
-                }, 500);
-            }
-            progressBar.style.width = `${progress}%`;
-        }, 100);
-    } else {
-        // If no preloader, initialize website immediately
-        initializeWebsite();
-    }
+    }, 3000); // Matches the 3s CSS animation duration
 });
 
 // Initialize main website functionality
@@ -210,8 +177,3 @@ function initializeMarqueeEffects() {
         }
     }
 }
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Any additional initialization can go here
-});
