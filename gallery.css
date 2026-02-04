@@ -797,7 +797,7 @@ img {
     background: rgba(74, 111, 255, 0.2);
     border: 2px solid var(--primary-color);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10000;
     transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     mix-blend-mode: normal;
     box-shadow: 0 0 8px rgba(74, 111, 255, 0.3);
