@@ -582,7 +582,7 @@
         .logo-img {
             height: 60px;
             width: auto;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+            filter: none;
         }
         
         .logo-text {
@@ -1749,6 +1749,16 @@
                 text-align: center;
                 justify-content: center;
             }
+            .logo-img {
+                height: 35px;
+                filter: none;
+            }
+            .logo-title {
+                display: none;
+            }
+            .logo-subtitle {
+                display: none;
+            }
         }
         /* Small Mobile */
         
@@ -1768,14 +1778,15 @@
             .section-subtitle {
                 font-size: 1rem;
             }
-            .logo-container {
-                gap: 10px;
+            .logo-img {
+                height: 35px;
+                filter: none;
             }
             .logo-title {
-                font-size: 1.5rem;
+                display: none;
             }
-            .logo-img {
-                height: 45px;
+            .logo-subtitle {
+                display: none;
             }
             .preloader-logo {
                 height: 300px;
@@ -2057,11 +2068,10 @@
     <!-- Header & Navigation -->
     <header>
         <div class="logo-container">
-            <img src="assets/au_logo.jpg" alt="Adamas Logo" class="logo-img">
-            <img src="assets/logo.png" alt="GameLiminals Logo" class="logo-img">
+            <img src="assets/nav.png" alt="Nav Logo" class="logo-img">
             <div class="logo-text">
                 <h1 class="logo-title">GameLiminals</h1>
-                <p class="logo-subtitle">ADAMAS GAME DEVELOPMENT CLUB</p>
+                <p class="logo-subtitle">Powered By CSI & SME</p>
             </div>
         </div>
 
@@ -2390,7 +2400,7 @@
 
             <div class="footer-bottom">
                 <p class="copyright">© 2026 GameLiminals Game Development Club. Official club of Adamas University. All rights reserved.</p>
-                <p class="footer-note">Powered by SME & CSI Adamas</p>
+                <p class="footer-note">Powered by SME & CSI Adamas | Approved By CSE Department of Adamas University</p>
             </div>
         </div>
     </footer>

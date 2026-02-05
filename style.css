@@ -578,17 +578,8 @@ header {
 
 .logo-img {
     height: 60px;
-    width: 60px;
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    border-radius: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.2rem;
-    box-shadow: var(--shadow-light);
+    width: auto;
+    filter: none;
 }
 
 .logo-text {
@@ -1284,6 +1275,20 @@ footer {
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+    .logo-container {
+        flex: 1;
+        min-width: 0;
+    }
+    .logo-img {
+        height: 35px;
+        filter: none;
+    }
+    .logo-title {
+        display: none;
+    }
+    .logo-subtitle {
+        display: none;
     }
 }
 

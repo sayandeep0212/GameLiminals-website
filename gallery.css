@@ -797,7 +797,7 @@ img {
     background: rgba(74, 111, 255, 0.2);
     border: 2px solid var(--primary-color);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10000;
     transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, background 0.2s ease, border-color 0.2s ease;
     mix-blend-mode: normal;
     box-shadow: 0 0 8px rgba(74, 111, 255, 0.3);
@@ -860,7 +860,7 @@ header {
 .logo-img {
     height: 60px;
     width: auto;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+    filter: none;
 }
 
 .logo-text {
@@ -1538,13 +1538,14 @@ footer {
         min-width: 0;
     }
     .logo-img {
-        height: 50px;
+        height: 35px;
+        filter: none;
     }
     .logo-title {
-        font-size: 1.3rem;
+        display: none;
     }
     .logo-subtitle {
-        font-size: 0.7rem;
+        display: none;
     }
     .nav-menu li {
         margin: 1.5rem 0;
