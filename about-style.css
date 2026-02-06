@@ -305,6 +305,15 @@ h1.brand-name::after {
 
 /* Tablet & Small Laptops (Max Width: 992px) */
 
+@media (min-width: 1280px) and (max-width: 1450px) {
+    .logo-title {
+        display: none;
+    }
+    .logo-subtitle {
+        display: none;
+    }
+}
+
 @media (max-width: 1280px) {
     .logo-title {
         display: none;
