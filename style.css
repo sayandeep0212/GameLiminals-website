@@ -319,6 +319,15 @@ h1.brand-name::after {
     }
 }
 
+@media (min-width: 1280px) and (max-width: 1400px) {
+    .logo-title {
+        display: none;
+    }
+    .logo-subtitle {
+        display: none;
+    }
+}
+
 
 /* Mobile Devices (Max Width: 600px) */
 
