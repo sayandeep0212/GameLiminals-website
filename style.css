@@ -319,7 +319,7 @@ h1.brand-name::after {
     }
 }
 
-@media (min-width: 1280px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1450px) {
     .logo-title {
         display: none;
     }
