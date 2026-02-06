@@ -1502,6 +1502,41 @@ footer {
         width: 180px;
         height: 180px;
     }
+    @media (max-width: 992px) {
+        /* Show hamburger */
+        .hamburger {
+            display: flex;
+        }
+        /* Hide menu by default */
+        .nav-menu {
+            position: fixed;
+            left: -100%;
+            top: 70px;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.98);
+            width: 100%;
+            text-align: center;
+            transition: 0.3s ease;
+            padding: 2rem 0;
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+            box-shadow: var(--shadow-medium);
+            z-index: 999;
+        }
+        /* When hamburger is clicked */
+        .nav-menu.active {
+            left: 0;
+        }
+        .nav-link {
+            display: block;
+            padding: 0.8rem 1rem;
+            margin: 0.3rem 0;
+        }
+        /* Optional: remove underline animation on mobile */
+        .nav-link::after {
+            display: none;
+        }
+    }
 }
 
 
