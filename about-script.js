@@ -144,7 +144,7 @@ function initializeAnimatedCounters() {
     // Set target values
     const counters = {
         yearsCount: 2,
-        membersCount: 150,
+        membersCount: 250,
         projectsCount: 0,
         awardsCount: 1,
         eventsCount: 1,
@@ -289,4 +289,5 @@ function addInteractiveEffects() {
             }, 300);
         });
     });
+
 }
