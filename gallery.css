@@ -367,6 +367,98 @@ h1.brand-name::after {
     .logo-subtitle {
         display: none;
     }
+    /* =========================================
+   FOOTER – EVENTS STYLE (MATCH IMAGE)
+   Max-width: 992px
+   ========================================= */
+    footer {
+        background: #0b0f14;
+        color: #cbd5e1;
+        padding: 4rem 6% 2rem;
+        font-family: 'Poppins', sans-serif;
+    }
+    /* GRID LAYOUT */
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem 4rem;
+    }
+    /* HEADINGS */
+    footer h3,
+    footer h4 {
+        font-family: 'Orbitron', sans-serif;
+        color: #ffffff;
+        margin-bottom: 1.2rem;
+        font-size: 1.1rem;
+        letter-spacing: 0.5px;
+    }
+    /* LEFT BLOCK */
+    .footer-brand p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: #94a3b8;
+        max-width: 280px;
+    }
+    .footer-brand i {
+        color: #4a6fff;
+        margin-right: 8px;
+    }
+    /* LINKS */
+    .footer-links,
+    .footer-resources,
+    .footer-socials {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+    .footer-links a,
+    .footer-resources a,
+    .footer-socials a {
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .footer-links a:hover,
+    .footer-resources a:hover,
+    .footer-socials a:hover {
+        color: #4a6fff;
+        transform: translateX(4px);
+    }
+    .footer-socials i {
+        color: #4a6fff;
+        font-size: 1rem;
+    }
+    /* EMAIL */
+    .footer-email {
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .footer-email i {
+        color: #4a6fff;
+    }
+    /* BOTTOM BAR */
+    .footer-bottom {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: center;
+        font-size: 0.8rem;
+        color: #94a3b8;
+    }
+    .footer-bottom small {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        opacity: 0.8;
+    }
 }
 
 
@@ -2117,4 +2209,44 @@ html,
 body {
     max-width: 100%;
     overflow-x: hidden;
+}
+
+
+/* =========================================
+   FORCE EVENTS FOOTER – GALLERY
+   Max-width: 992px
+   ========================================= */
+
+@media (max-width: 992px) {
+    footer {
+        background: #0b0f14 !important;
+        color: #cbd5e1 !important;
+        padding: 4rem 6% 2rem !important;
+    }
+    footer .footer-content {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem 4rem;
+    }
+    footer h3,
+    footer h4 {
+        color: #ffffff !important;
+        font-family: 'Orbitron', sans-serif;
+        margin-bottom: 1rem;
+    }
+    footer a {
+        color: #cbd5e1 !important;
+        font-size: 0.9rem;
+    }
+    footer a:hover {
+        color: #4a6fff !important;
+    }
+    footer .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #94a3b8 !important;
+    }
 }
