@@ -2313,6 +2313,12 @@ footer {
 /* For even smaller mobile devices */
 
 @media (max-width: 480px) {
+       html,
+    body {
+        width: 100%;
+        overflow-x: hidden !important;
+        position: relative;
+    }
     /* Even BIGGER preloader for very small screens */
     .preloader-title {
         font-size: 2.5rem;
@@ -2406,4 +2412,5 @@ footer {
     .logo-title {
         font-size: 1.3rem;
     }
+
 }
