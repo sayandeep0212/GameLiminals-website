@@ -303,6 +303,73 @@ h1.brand-name::after {
 }
 
 
+/* Tablet & Small Laptops (Max Width: 992px) */
+
+@media (max-width: 992px) {
+    h1.brand-name {
+        font-size: 3rem;
+    }
+    /* 1. Show the Hamburger Icon */
+    .hamburger {
+        display: flex !important;
+        z-index: 1100;
+        position: relative;
+    }
+    /* 2. Transform the Menu into a Mobile Drawer */
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        /* Adjust based on your header height */
+        flex-direction: column;
+        background: rgba(255, 255, 255, 0.98);
+        width: 100%;
+        height: calc(100vh - 70px);
+        text-align: center;
+        transition: 0.3s ease-in-out;
+        padding: 2rem 0;
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--border-color);
+        box-shadow: var(--shadow-medium);
+        z-index: 1050;
+        display: flex;
+        /* Ensure it's visible as a flex column */
+    }
+    /* 3. Slide Menu in when Active */
+    .nav-menu.active {
+        left: 0;
+    }
+    /* 4. Hamburger 'X' Animation */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    /* 5. Mobile Nav Link Adjustments */
+    .nav-link {
+        font-size: 1.2rem;
+        padding: 1rem;
+        display: block;
+    }
+    .nav-link::after {
+        display: none;
+        /* Remove desktop underline effect */
+    }
+    /* 6. Logo Adjustments to avoid crowding */
+    .logo-img {
+        height: 45px;
+    }
+    .logo-title,
+    .logo-subtitle {
+        display: none;
+    }
+}
+
+
 /* Mobile Devices (Max Width: 600px) */
 
 @media (max-width: 600px) {
