@@ -327,21 +327,138 @@
                 display: none;
             }
         }
+        /* ==================== UNIFIED MOBILE NAVIGATION (Up to 992px) ==================== */
         
         @media (max-width: 992px) {
-            h1.brand-name {
-                font-size: 3rem;
+            /* 1. Show the Hamburger Icon */
+            .hamburger {
+                display: flex !important;
+                /* Force visibility */
+                flex-direction: column;
+                z-index: 1100;
+                cursor: pointer;
             }
-            .logo-icon {
-                width: 300px;
-                height: 300px;
+            /* 2. Transform Menu into Mobile Drawer */
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 0;
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                height: 100vh;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 1050;
+                backdrop-filter: blur(15px);
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
             }
-            .logo-ring {
-                width: 95px;
-                height: 95px;
+            /* 3. Slide Menu in when Active */
+            .nav-menu.active {
+                left: 0;
             }
-            .logo-icon span {
-                font-size: 28px;
+            /* 4. Hamburger 'X' Animation */
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+            /* 5. Clean up Links and Logo */
+            .nav-link {
+                font-size: 1.4rem;
+                margin: 1.5rem 0;
+                padding: 0.5rem 2rem;
+            }
+            .nav-link::after {
+                display: none;
+                /* Remove desktop underline */
+            }
+            .logo-title,
+            .logo-subtitle {
+                display: none;
+                /* Prevents header crowding */
+            }
+            .logo-img {
+                height: 45px;
+            }
+        }
+        /* ===============================
+   NAVBAR RESPONSIVE (MATCH TEAM)
+   =============================== */
+        /* ===============================
+   RESPONSIVE NAVBAR (992px ↓)
+   =============================== */
+        /* ==================== UNIFIED MOBILE NAVIGATION (Up to 992px) ==================== */
+        
+        @media (max-width: 992px) {
+            /* Show the Hamburger Icon */
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            /* Transform the Menu into a Mobile Drawer */
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                /* Aligns with header height */
+                flex-direction: column;
+                background: rgba(255, 255, 255, 0.98);
+                width: 100%;
+                height: calc(100vh - 70px);
+                text-align: center;
+                transition: 0.3s ease-in-out;
+                padding: 2rem 0;
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--border-color);
+                box-shadow: var(--shadow-medium);
+                display: flex;
+                /* Keep flex for vertical centering if needed */
+            }
+            /* Menu Slide-in Animation */
+            .nav-menu.active {
+                left: 0;
+            }
+            /* Hamburger Animation to 'X' */
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+            /* Mobile Nav Link Styles */
+            .nav-link {
+                font-size: 1.2rem;
+                padding: 1rem;
+                display: block;
+            }
+            .nav-link::after {
+                display: none;
+                /* Removes desktop underline animation */
+            }
+            /* Responsive Header Adjustments */
+            .logo-img {
+                height: 45px;
+            }
+            .logo-title,
+            .logo-subtitle {
+                display: none;
+                /* Hide text to avoid crowding on smaller tablets */
+            }
+            /* Layout Adjustments for Registration Content */
+            .registration-container {
+                grid-template-columns: 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
             }
         }
         /* Mobile Devices (Max Width: 600px) */
@@ -1608,6 +1725,10 @@
             }
             .hero-subtitle {
                 font-size: 1.2rem;
+            }
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
             }
             .section-title {
                 font-size: 2rem;
