@@ -1568,6 +1568,13 @@ footer {
 /* Small Mobile */
 
 @media (max-width: 480px) {
+    .logo-img {
+        height: 35px;
+        width: auto;
+    }
+    .hamburger {
+        display: flex;
+    }
     .hero-title {
         font-size: 2rem;
     }
@@ -1626,6 +1633,13 @@ footer {
 /* Extra Small Mobile */
 
 @media (max-width: 360px) {
+    .logo-img {
+        height: 30px;
+        width: auto;
+    }
+    .hamburger {
+        display: flex;
+    }
     .hero-title {
         font-size: 1.7rem;
     }
