@@ -302,7 +302,7 @@ h1.brand-name::after {
 .hide-preloader {
     opacity: 0 !important;
     visibility: hidden !important;
-    pointer-projects: none;
+    pointer-events: none;
 }
 
 
@@ -315,7 +315,7 @@ h1.brand-name::after {
     border-radius: 50%;
     background: rgba(74, 111, 255, 0.3);
     border: 2px solid var(--primary-color);
-    pointer-projects: none;
+    pointer-events: none;
     z-index: 10000;
     transition: transform 0.15s, width 0.2s, height 0.2s;
     mix-blend-mode: normal;
@@ -341,7 +341,7 @@ header {
     align-items: center;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    z-index: 1000;
+    z-index: 9999;
     border-bottom: 1px solid var(--border-color);
     box-shadow: var(--shadow-light);
 }
