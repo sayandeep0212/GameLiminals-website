@@ -111,12 +111,16 @@ function initializeAboutPage() {
 
     // Set active navigation link
     const currentPage = window.location.pathname.split('/').pop();
+    const currentPageNormalized = currentPage.replace('.html', '') || 'index';
     const navLinks = document.querySelectorAll('.nav-link');
 
     navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage ||
-            (currentPage === '' && link.getAttribute('href') === 'index.html') ||
-            (link.getAttribute('href').includes('#about') && currentPage.includes('about'))) {
+        const href = link.getAttribute('href');
+        const hrefNormalized = href.replace('.html', '');
+        
+        if (hrefNormalized === currentPageNormalized ||
+            (currentPageNormalized === 'index' && href === 'index.html') ||
+            (hrefNormalized === '' && currentPageNormalized === 'index')) {
             link.classList.add('active');
         } else {
             link.classList.remove('active');
