@@ -595,7 +595,7 @@ function updateURL() {
     const params = new URLSearchParams();
     if (currentFilter !== 'all') params.set('filter', currentFilter);
     if (searchTerm) params.set('search', searchTerm);
-    const newURL = params.toString() ? `?${params.toString()}` : 'events.html';
+    const newURL = params.toString() ? `?${params.toString()}` : '/events';
     window.history.replaceState({}, '', newURL);
 }
 
@@ -643,4 +643,5 @@ function showError(message) {
 window.viewEventDetails = viewEventDetails;
 window.closeEventModal = closeEventModal;
 window.resetFilters = resetFilters;
+
 window.scrollToEvents = scrollToEvents;
