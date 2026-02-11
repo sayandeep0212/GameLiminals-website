@@ -323,18 +323,31 @@ function initializeTeamPage() {
     });
 
     // Set active navigation link
-    const currentPage = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.nav-link');
+    const setActiveNavLink = () => {
+        const currentPath = window.location.pathname.split('/').pop() || '';
+        const currentPageNormalized = currentPath.replace('.html', '') || 'index';
+        const navLinks = document.querySelectorAll('.nav-link');
 
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage ||
-            (currentPage === '' && link.getAttribute('href') === 'index.html') ||
-            (link.getAttribute('href').includes('#team') && currentPage.includes('team'))) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            const hrefPath = href.split('/').pop().replace('.html', '');
+
+            // Match if normalized paths are equal
+            const isCurrentPage = hrefPath === currentPageNormalized ||
+                (currentPageNormalized === 'index' && href === 'index.html') ||
+                (currentPageNormalized === 'index' && href === '');
+
+            if (isCurrentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    };
+
+    setActiveNavLink();
+    // Re-check on popstate (back/forward button)
+    window.addEventListener('popstate', setActiveNavLink);
 
     // Initialize team member card animations
     initializeTeamCardAnimations();
