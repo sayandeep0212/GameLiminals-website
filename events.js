@@ -351,10 +351,16 @@ function createEventCard(event, index) {
     let statusClass = 'closed';
     let statusText = 'Past';
 
-    if (event.isClosed) { statusClass = 'closed';
-        statusText = 'Closed'; } else if (isOngoing) { statusClass = 'ongoing';
-        statusText = 'Ongoing'; } else if (isUpcoming) { statusClass = 'upcoming';
-        statusText = 'Upcoming'; }
+    if (event.isClosed) {
+        statusClass = 'closed';
+        statusText = 'Closed';
+    } else if (isOngoing) {
+        statusClass = 'ongoing';
+        statusText = 'Ongoing';
+    } else if (isUpcoming) {
+        statusClass = 'upcoming';
+        statusText = 'Upcoming';
+    }
 
     const card = document.createElement('div');
     card.className = `event-card ${statusClass}`;
