@@ -4,47 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>Our Projects | GameLiminals</title>
+    <meta name="description" content="Explore our game development projects portfolio. See the amazing games and tools created by the GameLiminals team at Adamas University.">
+    <meta name="author" content="GameLiminals Team">
 
-    <title>Game Development Projects | Coming Soon | GameLiminals</title>
-    <meta name="description" content="Our game development projects are coming soon! Stay tuned for exciting games created by the GameLiminals team at Adamas University.">
-    <meta name="author" content="Sayandeep Pradhan">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
-
+    <!-- Open Graph & Social Meta -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="GameLiminals">
-    <meta property="og:url" content="https://gameliminals.vercel.app/">
+    <meta property="og:title" content="Our Projects | GameLiminals">
+    <meta property="og:description" content="Explore our game development projects portfolio.">
+    <meta property="og:url" content="https://gameliminals.vercel.app/projects.html">
     <meta property="og:image" content="https://gameliminals.vercel.app/assets/logo2.png">
     <meta property="twitter:card" content="summary_large_image">
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
-    <meta name="google-site-verification" content="cf4Xkiblsr-E7v7hHNbBGdRATGamFPyZ3hg22A8NUHI" />
 
-    <!-- Projects Coming Soon Page Specific Styles -->
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+
+    <!-- Projects Page Specific Styles -->
     <link rel="stylesheet" href="projects.css">
-    <link rel="manifest" href="manifest.json">
+
+    <!-- Main Portfolio Styles (for project cards) -->
+    <link rel="stylesheet" href="style.css">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600&display=swap">
-
 </head>
 
 <body>
-
     <!-- Preloader -->
     <div id="preloader">
         <div class="logo-container2">
             <img src="assets/blackpreloader-logo.jpeg" alt="GameLiminals Logo" class="logo-icon">
         </div>
-
         <h1 class="brand-name">GameLiminals</h1>
-
         <div class="tagline-box">
             <span class="tagline-text">Projects</span>
         </div>
-
         <div class="loader-wrapper">
             <div class="loading-text">Loading Projects...</div>
             <div class="progress-bar-bg">
@@ -65,10 +63,9 @@
                 <p class="logo-subtitle">Powered By CSI & ACM</p>
             </div>
         </div>
-
         <nav class="navbar">
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="https://gameliminals.vercel.app" class="nav-link">Home</a></li>
                 <li><a href="about.html" class="nav-link">About</a></li>
                 <li><a href="projects.html" class="nav-link active">Projects</a></li>
                 <li><a href="events.html" class="nav-link">Events</a></li>
@@ -85,106 +82,210 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Coming Soon Hero Section -->
-        <section class="projects-hero" style="min-height: 70vh;">
+        <!-- Projects Hero Section -->
+        <section class="projects-hero">
             <div class="container">
                 <div class="projects-hero-content">
-                    <div class="projects-hero-text" style="text-align: center; width: 100%;">
+                    <div class="projects-hero-text">
                         <h1 class="projects-title">
-                            <span class="highlight">Projects</span> Coming Soon
+                            Our <span class="highlight">Projects</span> Portfolio
                         </h1>
                         <p class="projects-subtitle">
-                            Our game development projects showcase is currently under construction. We're working hard to bring you amazing games, tools, and learning resources!
+                            Explore the innovative game development projects created by our talented team. Each project showcases our skills in game design, programming, and creative problem-solving.
                         </p>
 
-                        <!-- Countdown Timer (Optional) -->
-                        <div class="coming-soon-container" style="margin: 3rem auto; max-width: 600px;">
-                            <div class="countdown-timer" style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                                <div class="countdown-item" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: var(--border-radius); min-width: 100px;">
-                                    <div class="countdown-value" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Orbitron', sans-serif;">00</div>
-                                    <div class="countdown-label" style="color: var(--text-light); margin-top: 0.5rem;">Days</div>
-                                </div>
-                                <div class="countdown-item" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: var(--border-radius); min-width: 100px;">
-                                    <div class="countdown-value" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Orbitron', sans-serif;">00</div>
-                                    <div class="countdown-label" style="color: var(--text-light); margin-top: 0.5rem;">Hours</div>
-                                </div>
-                                <div class="countdown-item" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: var(--border-radius); min-width: 100px;">
-                                    <div class="countdown-value" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Orbitron', sans-serif;">00</div>
-                                    <div class="countdown-label" style="color: var(--text-light); margin-top: 0.5rem;">Minutes</div>
-                                </div>
-                                <div class="countdown-item" style="text-align: center; padding: 1.5rem; background: rgba(255,255,255,0.1); border-radius: var(--border-radius); min-width: 100px;">
-                                    <div class="countdown-value" style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Orbitron', sans-serif;">00</div>
-                                    <div class="countdown-label" style="color: var(--text-light); margin-top: 0.5rem;">Seconds</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Coming Soon Features -->
-                        <div class="coming-soon-features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 4rem 0;">
-                            <div class="feature-card" style="text-align: center; padding: 2rem; background: white; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
-                                <div class="feature-icon" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1.5rem;">
+                        <!-- Projects Stats -->
+                        <div class="projects-stats">
+                            <div class="stat-item">
+                                <div class="stat-icon">
                                     <i class="fas fa-gamepad"></i>
                                 </div>
-                                <h3 style="color: var(--text-dark); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Game Projects</h3>
-                                <p style="color: var(--text-light); line-height: 1.6;">2D, 3D, Mobile, and VR games created by our talented developers</p>
-                            </div>
-
-                            <div class="feature-card" style="text-align: center; padding: 2rem; background: white; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
-                                <div class="feature-icon" style="font-size: 3rem; color: var(--accent-color); margin-bottom: 1.5rem;">
-                                    <i class="fas fa-tools"></i>
+                                <div class="stat-content">
+                                    <h3>10+</h3>
+                                    <p>Games Developed</p>
                                 </div>
-                                <h3 style="color: var(--text-dark); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Dev Tools</h3>
-                                <p style="color: var(--text-light); line-height: 1.6;">Custom game engines, plugins, and development utilities</p>
                             </div>
-
-                            <div class="feature-card" style="text-align: center; padding: 2rem; background: white; border-radius: var(--border-radius); box-shadow: var(--shadow-light);">
-                                <div class="feature-icon" style="font-size: 3rem; color: var(--secondary-color); margin-bottom: 1.5rem;">
-                                    <i class="fas fa-graduation-cap"></i>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-code"></i>
                                 </div>
-                                <h3 style="color: var(--text-dark); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Learning Resources</h3>
-                                <p style="color: var(--text-light); line-height: 1.6;">Tutorials, documentation, and educational content</p>
+                                <div class="stat-content">
+                                    <h3>15+</h3>
+                                    <p>Technologies Used</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- CTA Buttons -->
-                        <div class="coming-soon-actions" style="margin-top: 3rem;">
-                            <a href="events.html" class="cta-button primary" style="display: inline-flex; align-items: center; gap: 10px; padding: 1rem 2.5rem; border-radius: 50px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; text-decoration: none; font-weight: 600; margin: 0 1rem; font-size: 1.1rem;">
-                                <i class="fas fa-calendar-alt"></i> View Our Events
-                            </a>
-                            <a href="registration.html" class="cta-button secondary" style="display: inline-flex; align-items: center; gap: 10px; padding: 1rem 2.5rem; border-radius: 50px; background: white; color: var(--primary-color); text-decoration: none; font-weight: 600; margin: 0 1rem; font-size: 1.1rem; border: 2px solid var(--border-color);">
-                                <i class="fas fa-user-plus"></i> Join Our Club
-                            </a>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>18</h3>
+                                    <p>Team Members</p>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>5+</h3>
+                                    <p>Awards Won</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Floating Shapes Background -->
+            <div class="floating-shapes">
+                <div class="shape shape-1">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="shape shape-2">
+                    <i class="fas fa-dice"></i>
+                </div>
+                <div class="shape shape-3">
+                    <i class="fas fa-ghost"></i>
+                </div>
+                <div class="shape shape-4">
+                    <i class="fas fa-chess-board"></i>
+                </div>
+                <div class="shape shape-5">
+                    <i class="fas fa-puzzle-piece"></i>
+                </div>
+            </div>
+            <div class="hero-glow"></div>
         </section>
 
-        <!-- Newsletter Section -->
-        <section class="projects-filter-section" style="padding: 6rem 5%; background: var(--background-gray);">
+        <!-- Projects Grid Section (from index.html) -->
+        <section id="project-a" class="project-section">
             <div class="container">
-                <div class="filter-header">
-                    <h2>Get <span class="highlight">Notified</span></h2>
-                    <p>Be the first to know when our projects go live!</p>
+                <div class="content">
+                    <h2>Featured Projects</h2>
+                    <p>Click on a project card to view details. Tap once to flip (mobile) or hover (desktop).</p>
                 </div>
-
-                <div class="newsletter-form" style="max-width: 600px; margin: 3rem auto;">
-                    <div class="search-container" style="flex-direction: column; padding: 3rem; border-radius: var(--border-radius);">
-                        <i class="fas fa-envelope" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1.5rem;"></i>
-                        <h3 style="color: var(--text-dark); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Stay Updated</h3>
-                        <p style="color: var(--text-light); margin-bottom: 2rem; line-height: 1.6;">Subscribe to our newsletter and we'll notify you as soon as our projects are ready for showcase.</p>
-
-                        <form>
-                            <input type="email" placeholder="Enter your email address" style="flex: 1; padding: 1rem 1.5rem; border: 2px solid var(--border-color); border-radius: 50px; font-size: 1rem; font-family: 'Poppins', sans-serif; outline: none;">
-                            <button class="cta-button primary" style="padding: 1rem 2rem; border-radius: 50px; border: none; cursor: pointer; white-space: nowrap;">
-        <i class="fas fa-paper-plane"></i> Subscribe
-    </button>
-                        </form>
-                        <p style="color: var(--text-lighter); font-size: 0.9rem; margin-top: 1rem; text-align: center;">We respect your privacy. Unsubscribe at any time.</p>
-                    </div>
+                <div id="project-grid" class="project-grid">
+                    <!-- Project cards will be injected here by JavaScript -->
                 </div>
             </div>
         </section>
+
+        <!-- Project Details Overlay -->
+        <div id="project-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <button id="close-overlay" class="close-btn">&times;</button>
+                <div class="overlay-header">
+                    <h2 id="overlay-title">Project Title</h2>
+                    <span id="overlay-date" class="meta-tag">2023</span>
+                </div>
+                <div class="overlay-body">
+                    <div class="overlay-image-container">
+                        <div class="carousel-container">
+                            <div class="carousel-track" id="carousel-track">
+                                <!-- Slides will be injected here -->
+                            </div>
+                            <button class="carousel-btn prev" id="carousel-prev">&lt;</button>
+                            <button class="carousel-btn next" id="carousel-next">&gt;</button>
+                            <div class="carousel-dots" id="carousel-dots"></div>
+                        </div>
+                    </div>
+                    <div class="overlay-details">
+                        <div class="detail-section">
+                            <h3>About the Project</h3>
+                            <p id="overlay-desc">Project description goes here.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Technologies</h3>
+                            <ul id="overlay-tech" class="tech-list">
+                                <!-- Tech items will be injected here -->
+                            </ul>
+                        </div>
+                        <div class="detail-row">
+                            <div>
+                                <strong>Client:</strong> <span id="overlay-client">Client Name</span>
+                            </div>
+                            <div>
+                                <strong>Role:</strong> <span id="overlay-role">Developer</span>
+                            </div>
+                        </div>
+
+                        <!-- EXCITEMENT SLIDER SECTION -->
+                        <div class="excitement-section">
+                            <h4><i class="fas fa-fire"></i> Excitement Level</h4>
+
+                            <div class="excitement-slider-container">
+                                <div class="excitement-labels">
+                                    <span>
+                                        <i class="fas fa-meh"></i>
+                                        Low Interest
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-smile"></i>
+                                        Moderate
+                                    </span>
+                                    <span>
+                                        <i class="fas fa-grin-stars"></i>
+                                        Very Excited!
+                                    </span>
+                                </div>
+
+                                <div class="excitement-slider-wrapper">
+                                    <input type="range" min="0" max="100" value="50" class="excitement-slider" id="excitement-slider">
+                                </div>
+
+                                <div class="excitement-value-display">
+                                    <div class="excitement-percentage" id="excitement-percentage">50%</div>
+                                    <div class="excitement-text" id="excitement-text">Moderate excitement</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FEEDBACK & RATING SECTION -->
+                        <div class="feedback-section">
+                            <h4>Rate this Project</h4>
+
+                            <div class="rating-container">
+                                <div class="stars" id="rating-stars">
+                                    <span class="star" data-value="1">☆</span>
+                                    <span class="star" data-value="2">☆</span>
+                                    <span class="star" data-value="3">☆</span>
+                                    <span class="star" data-value="4">☆</span>
+                                    <span class="star" data-value="5">☆</span>
+                                </div>
+                                <span class="rating-value" id="rating-value">0/5</span>
+                            </div>
+
+                            <div class="feedback-form">
+                                <textarea id="feedback-text" placeholder="Share your thoughts about this project... (optional)"></textarea>
+
+                                <div class="feedback-buttons">
+                                    <button class="submit-feedback" id="submit-feedback">
+                                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                                    </button>
+                                    <!-- GitHub button will be dynamically added here -->
+                                </div>
+
+                                <div class="feedback-stats" id="feedback-stats">
+                                    <div class="stat">
+                                        <span class="stat-value" id="average-rating">0.0</span>
+                                        <span class="stat-label">Avg. Rating</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value" id="total-feedback">0</span>
+                                        <span class="stat-label">Total Reviews</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-value" id="average-excitement">0%</span>
+                                        <span class="stat-label">Avg. Excitement</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -245,14 +346,16 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript Files -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Use your firebase2.config.js file -->
+    <script src="firebase2-config.js"></script>
 
-    <script src="firebase-config.js"></script>
+    <!-- Main Projects JavaScript -->
+    <script type="module" src="projects.js"></script>
 
-    <script src="projects.js"></script>
-
+    <!-- Preloader and Navigation JavaScript -->
     <script>
         // Preloader handling
         document.addEventListener('DOMContentLoaded', function() {
@@ -263,7 +366,7 @@
                     setTimeout(() => {
                         preloader.style.display = 'none';
                     }, 600);
-                }, 3000);
+                }, 1500); // Reduced from 3000ms to 1500ms for better UX
             }
 
             // Mobile navigation
@@ -274,9 +377,25 @@
                     hamburger.classList.toggle('active');
                     navMenu.classList.toggle('active');
                 });
+
+                // Close menu when clicking on a link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
             }
         });
     </script>
+    <!-- Firebase App (Core) -->
+
+
+    <!-- Firebase Config -->
+    <script src="firebase2-config.js"></script>
+
+    <!-- Projects JS -->
+    <script src="projects.js"></script>
 
 </body>
 
