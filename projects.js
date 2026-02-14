@@ -1,5 +1,5 @@
 // ==============================================
-// PROJECTS.JS - FIXED DATABASE CONNECTION (NO DECEPTIVE FALLBACKS)
+// PROJECTS.JS - FIXED VIDEO AUTOPLAY & STOP LOGIC
 // ==============================================
 
 // Wait for the DOM to be fully loaded
@@ -68,6 +68,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextBtn = document.getElementById('carousel-next');
     const dotsContainer = document.getElementById('carousel-dots');
 
+    // --- VIDEO HELPER: STOP ALL VIDEOS ---
+    function stopAllVideos() {
+        if (!carouselTrack) return;
+        const videos = carouselTrack.querySelectorAll('video');
+        videos.forEach(video => {
+            video.pause();
+            // Optional: reset to beginning
+            // video.currentTime = 0; 
+        });
+    }
+
     // --- CUSTOM CURSOR - FIXED AND ENHANCED ---
     function initCustomCursor() {
         const cursor = document.querySelector('.cursor');
@@ -132,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log("⚠️ Database connected but empty. Attempting to create samples...");
                 
                 // Try to create samples. 
-                // Note: This will fail if your Security Rules are set to "allow read, write: if false;"
                 const samplesCreated = await initializeSampleProjects();
                 
                 if (samplesCreated) {
@@ -142,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
                      return;
                 } else {
                     // If samples failed (e.g. permissions), SHOW EMPTY STATE.
-                    // Do NOT load fallbacks. This proves the DB connection is real.
                     console.log("ℹ️ Rendering empty state (No projects in DB).");
                     projects = [];
                     renderProjects(); 
@@ -171,8 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         } catch (error) {
             console.error("❌ Error loading from Firebase:", error);
-            // Only load fallback if it's a critical network/code error.
-            // If it's a permission error, we should probably let the user know.
             if (error.code === 'permission-denied') {
                  projectGrid.innerHTML = `
                     <div style="grid-column: 1/-1; text-align: center; padding: 60px;">
@@ -349,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // --- 6. SHOW PROJECT DETAILS ---
+    // --- 6. SHOW PROJECT DETAILS (WITH VIDEO AUTOPLAY) ---
     async function showProjectDetails(project) {
         currentProjectId = project.id;
         currentProjectData = project;
@@ -386,7 +393,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // Initialize carousel
         setupCarousel(project);
+        
         resetFeedbackForm();
         await loadFeedbackStats(project.id);
 
@@ -394,9 +403,21 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = 'hidden';
         const overlayContent = document.querySelector('.overlay-content');
         if (overlayContent) overlayContent.scrollTop = 0;
+
+        // --- AUTOPLAY FIX: Check if first slide is video and play it ---
+        const firstSlide = carouselTrack.children[0];
+        if (firstSlide) {
+            const video = firstSlide.querySelector('video');
+            if (video) {
+                // Short timeout to ensure overlay transition doesn't block play
+                setTimeout(() => {
+                    video.play().catch(e => console.log("Autoplay blocked:", e));
+                }, 100);
+            }
+        }
     }
 
-    // --- 7. CAROUSEL SETUP ---
+    // --- 7. CAROUSEL SETUP (WITH VIDEO STOP/PLAY) ---
     function setupCarousel(project) {
         if (!carouselTrack) return;
 
@@ -418,6 +439,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 video.controls = true;
                 video.playsInline = true;
                 video.preload = 'metadata';
+                // Add muted attribute to allow autoplay in most browsers
+                // video.muted = true; 
                 slide.appendChild(video);
             } else {
                 const img = document.createElement('img');
@@ -450,9 +473,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
             }
 
-            carouselTrack.querySelectorAll('video').forEach(video => video.pause());
-            const currentVideo = carouselTrack.children[index]?.querySelector('video');
-            if (currentVideo) currentVideo.play().catch(() => {});
+            // --- STOP ALL VIDEOS when sliding ---
+            stopAllVideos();
+
+            // --- PLAY CURRENT VIDEO if exists ---
+            const currentSlideEl = carouselTrack.children[index];
+            if (currentSlideEl) {
+                const video = currentSlideEl.querySelector('video');
+                if (video) {
+                    video.play().catch(e => console.log("Video play failed:", e));
+                }
+            }
         }
 
         if (prevBtn && nextBtn) {
@@ -468,7 +499,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateCarousel(currentSlide);
             };
         }
-        updateCarousel(0);
+        // Initial set without playing video instantly (showProjectDetails handles the first play)
+        carouselTrack.style.transform = `translateX(0%)`;
     }
 
     // --- 8. FEEDBACK SYSTEM ---
@@ -660,9 +692,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- 10. EVENT LISTENERS ---
     function setupEventListeners() {
-        if (closeBtn) closeBtn.addEventListener('click', () => { overlay.classList.add('hidden'); document.body.style.overflow = 'auto'; });
-        if (overlay) overlay.addEventListener('click', (e) => { if(e.target === overlay) { overlay.classList.add('hidden'); document.body.style.overflow = 'auto'; }});
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay) { overlay.classList.add('hidden'); document.body.style.overflow = 'auto'; }});
+        // --- CLOSE ACTION: STOP VIDEOS ---
+        const closeAction = () => {
+            overlay.classList.add('hidden'); 
+            document.body.style.overflow = 'auto';
+            stopAllVideos(); // <--- CRITICAL FIX HERE
+        };
+
+        if (closeBtn) closeBtn.addEventListener('click', closeAction);
+        
+        if (overlay) overlay.addEventListener('click', (e) => { 
+            if(e.target === overlay) closeAction(); 
+        });
+        
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape' && overlay) closeAction();
+        });
         
         window.addEventListener('resize', () => {
              const cursor = document.querySelector('.cursor');
